@@ -24,8 +24,7 @@
 			<table>
 			    <thead>
 					<tr>
-					
-						<g:sortableColumn property="title" title="${message(code: 'question.title.label', default: 'title')}" />
+                       <g:sortableColumn property="title" title="${message(code: 'question.title.label', default: 'title')}" />
 					
 						<g:sortableColumn property="content" title="${message(code: 'question.content.label', default: 'content')}" />
 
@@ -35,8 +34,9 @@
 				<tbody>
 				<g:each in="${listQuestions}" status="i" var="currentQuestion">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${currentQuestion.id}">${fieldValue(bean: currentQuestion, field: "title")}</g:link></td>
+                        <g:render template="questionShortTemplate" collection="${currentQuestion}" />
+
+                        <td><g:link action="show" id="${currentQuestion.id}">${fieldValue(bean: currentQuestion, field: "title")}</g:link></td>
 					
 						<td>${fieldValue(bean: currentQuestion, field: "content")}</td>
 					
