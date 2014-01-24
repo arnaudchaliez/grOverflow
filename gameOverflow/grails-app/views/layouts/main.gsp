@@ -20,15 +20,7 @@
         <r:layoutResources />
 	</head>
 	<body>
-        <div class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-collapse collapse">
-		            <div id="gameOverFlowLogo" role="banner"><a href="/gameOverflow"><img src="${resource(dir: 'images', file: 'gameoverflow_logo.png')}" alt="GameOverFlow"/></a></div>
-                    <!-- for test -->
-                    <sec:username />
-                </div>
-            </div>
-        </div>
+        <g:render template="/layouts/topBar" />
         <div class="container">
             <div class="starter-template">
             <g:layoutBody/>
@@ -37,5 +29,6 @@
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 
+    <r:layoutResources />
 	</body>
 </html>

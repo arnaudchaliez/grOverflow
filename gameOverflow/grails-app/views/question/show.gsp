@@ -18,9 +18,10 @@
             <div id="show-question-content row">
                 <div class="col-xs-8">
                     <div class="well">
-                        ${question?.content}
+                        <!-- TODO SECURITY !! , sanitizer ?  -->
+                        ${raw(question?.content)}
                     </div>
-                    <g:form url="[resource:userInstance, action:'delete']" method="DELETE">
+                    <g:form url="[resource:question, action:'delete']" method="DELETE">
                         <fieldset class="buttons">
                             <g:link class="edit" action="edit" resource="${question}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
                             <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />

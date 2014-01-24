@@ -128,6 +128,12 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+	'/**/favicon.ico':                ['permitAll'],
+    '/**':                            ['ROLE_ADMIN']
 ]
 
+
+//application configuration
+
+//questions
+gameoverflow.question.max = 100
