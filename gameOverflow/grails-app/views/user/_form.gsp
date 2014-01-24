@@ -16,12 +16,12 @@
 	<g:textField name="firstname" required="" value="${userInstance?.firstname}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'pseudo', 'error')} required">
-	<label for="pseudo">
-		<g:message code="user.pseudo.label" default="Pseudo" />
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
+	<label for="username">
+		<g:message code="user.username.label" default="Pseudo" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="pseudo" maxlength="15" required="" value="${userInstance?.pseudo}"/>
+	<g:textField name="username" maxlength="15" required="" value="${userInstance?.username}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'dateRegistration', 'error')} required">

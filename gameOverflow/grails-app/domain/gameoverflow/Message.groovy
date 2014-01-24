@@ -12,7 +12,7 @@ abstract class Message {
     static constraints = {
         content(blank: false)
         score(defaultValue: "0")
-        author(blank:false)
-        date(blank:false)
+        author(blank: false)
+        date(blank: false)
     }
 }

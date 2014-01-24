@@ -1,6 +1,8 @@
 package gameoverflow
 
 import grails.transaction.Transactional
+import security.Role
+import security.UserRole
 
 @Transactional
 class UserService {
@@ -9,25 +11,12 @@ class UserService {
         return User.get(inId)
     }
 
-    def createUser(String inLastName, String inFirstName, String inPseudo, String inMail)
-    {
-        User user = new User(
-                lastname: inLastName,
-                firstname: inFirstName,
-                pseudo: inPseudo,
-                mail: inMail,
-                dateRegistration: new Date(),
-                type: User.TypeUser.NORMAL
-        ).save(failOnError: true)
-        return user
-    }
-
     def sayHello(int inId) {
 
         List<User> users = User.getAll();
         User user = User.get(inId)
         if (user)
-            return  "Hello " + user.pseudo
+            return  "Hello " + user.username
         else return users.get(0).id
     }
 }

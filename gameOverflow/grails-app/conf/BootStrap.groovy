@@ -1,17 +1,28 @@
 import gameoverflow.User
 import gameoverflow.Question
+import security.*
 
 class BootStrap {
     def questionService
     def userService
 
     def init = { servletContext ->
-        //create users
-        User kinoko = userService.createUser("Chaliez", "Arnaud", "Kinoko", "truc@gmail.com")
-        User bondika = userService.createUser("Bouny", "Jérémy", "Bondika", "bondika@truc.com")
+        def roleAdmin = new Role(authority: 'ROLE_ADMIN').save(failOnError:true)
+        def roleUser = new Role(authority: 'ROLE_USER').save(failOnError:true)
 
-        Question q1 = questionService.addQuestion("essai", "Does it work ?", kinoko)
-        Question q2 = questionService.addQuestion("essai2", "Maybe ?", bondika)
+        def userAdmin = new User(username: 'admin', dateRegistration: new Date(), password: 'admin', lastname: 'admin', firstname: 'admin', mail:'arnaudchlz@gmail.com', enabled: true)
+        userAdmin.save(failOnError:true)
+        def userKinoko = new User(username: 'Kinoko', dateRegistration: new Date(), password: 'kinoko', lastname: 'Chaliez', firstname: 'Arnaud', mail:'arnaudchlz@gmail.com', enabled: true)
+        userKinoko.save(failOnError:true)
+        def userBondika = new User(username: 'Bondika', dateRegistration: new Date(), password: 'bondika', lastname: 'Bouny', firstname: 'Jérémy', mail:'bondika@truc.com', enabled: true)
+        userBondika.save(failOnError:true)
+
+        UserRole.create(userAdmin, roleAdmin)
+        UserRole.create(userKinoko, roleUser)
+        UserRole.create(userBondika, roleUser)
+
+        Question q1 = questionService.addQuestion("essai", "Does it work ?", userAdmin)
+        Question q2 = questionService.addQuestion("essai2", "Maybe ?", userAdmin)
     }
     def destroy = {
     }

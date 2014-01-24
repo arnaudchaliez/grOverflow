@@ -6,7 +6,7 @@ class Question extends Message {
     String title
 
     List<Tag> tags
-    List<Answer> answers
+    List<Answer> answers = null
 
     static constraints = {
         title(title: false)

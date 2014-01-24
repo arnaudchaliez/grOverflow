@@ -1,5 +1,5 @@
-
 <%@ page import="gameoverflow.Question" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,14 +8,7 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
 	<body>
-		<a href="#list-question" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-    <div> ${questionListCount} Questions </div>
+        <div> ${questionListCount} Questions </div>
 		<div id="list-question" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -24,23 +17,22 @@
 			<table>
 			    <thead>
 					<tr>
-                       <g:sortableColumn property="title" title="${message(code: 'question.title.label', default: 'title')}" />
-					
-						<g:sortableColumn property="content" title="${message(code: 'question.content.label', default: 'content')}" />
+                        <g:sortableColumn property="answers" title="${message(code: 'question.answers.label', default: 'answers')}" />
+
+                        <g:sortableColumn property="views" title="${message(code: 'question.views.label', default: 'views')}" />
+
+                        <g:sortableColumn property="title" title="${message(code: 'question.title.label', default: 'title')}" />
+
+                        <g:sortableColumn property="score" title="${message(code: 'question.score.label', default: 'score')}" />
 
                         <g:sortableColumn property="date" title="${message(code: 'question.date.label', default: 'date')}" />
+
 					</tr>
 			    </thead>
 				<tbody>
 				<g:each in="${listQuestions}" status="i" var="currentQuestion">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                        <g:render template="questionShortTemplate" collection="${currentQuestion}" />
-
-                        <td><g:link action="show" id="${currentQuestion.id}">${fieldValue(bean: currentQuestion, field: "title")}</g:link></td>
-					
-						<td>${fieldValue(bean: currentQuestion, field: "content")}</td>
-					
-						<td><g:formatDate date="${currentQuestion.date}" /></td>
+                        <g:render template="questionShort" collection="${currentQuestion}" />
 					</tr>
 				</g:each>
 				</tbody>

@@ -14,16 +14,18 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 		<!--<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">-->
-		<g:layoutHead/>
-		<g:javascript library="application"/>
         <r:require modules="bootstrap"/>
+		<g:layoutHead/>
+        <g:javascript library="application"/>
         <r:layoutResources />
 	</head>
 	<body>
         <div class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-collapse collapse">
-		            <div id="gameOverFlowLogo" role="banner"><a href="#"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="GameOverFlow"/></a></div>
+		            <div id="gameOverFlowLogo" role="banner"><a href="/gameOverflow"><img src="${resource(dir: 'images', file: 'gameoverflow_logo.png')}" alt="GameOverFlow"/></a></div>
+                    <!-- for test -->
+                    <sec:username />
                 </div>
             </div>
         </div>

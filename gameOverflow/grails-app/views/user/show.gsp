@@ -41,11 +41,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.pseudo}">
+				<g:if test="${userInstance?.username}">
 				<li class="fieldcontain">
-					<span id="pseudo-label" class="property-label"><g:message code="user.pseudo.label" default="Pseudo" /></span>
+					<span id="username-label" class="property-label"><g:message code="user.username.label" default="username" /></span>
 					
-						<span class="property-value" aria-labelledby="pseudo-label"><g:fieldValue bean="${userInstance}" field="pseudo"/></span>
+						<span class="property-value" aria-labelledby="username-label"><g:fieldValue bean="${userInstance}" field="username"/></span>
 					
 				</li>
 				</g:if>

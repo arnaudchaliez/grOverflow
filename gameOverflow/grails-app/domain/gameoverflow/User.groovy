@@ -1,25 +1,58 @@
 package gameoverflow
 
+import security.*
+
 class User {
 
-    enum TypeUser {
-        NORMAL,
-        MODERATOR,
-        ADMINISTRATOR
-    }
+    transient springSecurityService
 
+    /** general informations */
     String lastname
     String firstname
-    String pseudo
+    String username
     String mail
     Date dateRegistration
+
+    /** gameOverflow informations */
     int score
-    TypeUser type
+    List<Badge> badges = null
+
+    /** security informations */
+    String password
+    boolean enabled = true
+    boolean accountExpired
+    boolean accountLocked
+    boolean passwordExpired
 
     static constraints = {
         lastname(blank: false)
         firstname(blank: false)
-        pseudo(blank:false, size: 3..15)
-        dateRegistration(blank:false)
+        username(blank: false, size: 3..15, unique: true)
+        password (blank: false)
+        dateRegistration(blank: false)
+    }
+
+    //increase performances, see spring documentation
+    static mapping = {
+        username column: '`username`'
+        password column: '`password`'
+    }
+
+    Set<Role> getAuthorities() {
+        UserRole.findAllByUser(this).collect { it.role } as Set
+    }
+
+    def beforeInsert() {
+        encodePassword()
+    }
+
+    def beforeUpdate() {
+        if (isDirty('password')) {
+            encodePassword()
+        }
+    }
+
+    protected void encodePassword() {
+        password = springSecurityService.encodePassword(password)
     }
 }
