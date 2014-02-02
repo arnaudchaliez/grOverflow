@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to GameOverFlow</title>
+		<title><g:message code="general.welcome" default="Welcome to GameOverFlow" /></title>
 	</head>
 	<body>
 		<div id="page-body" role="main">
@@ -10,15 +10,15 @@
             <div class="row">
                 <div class="col-xs-2">
                     <g:link controller="question">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Questions</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="questions.label" default="Questions" /></button>
                     </g:link>
                 </div>
                 <div class="col-xs-2">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Profil</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="profil.label" default="Profil" /></button>
                 </div>
                 <div class="col-xs-2 col-md-offset-2">
                     <g:link controller="question" action="create">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">New question</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="question.new" default="New question" /></button>
                     </g:link>
                 </div>
                 <div class="col-xs-4">
@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-xs-8">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Recent questions</div>
+                        <div class="panel-heading">><g:message code="questions.recent" default="Recent questions" /></div>
 
                         <ul class="list-group">
                             <g:each in="${listRecentQuestions}" var="currentQuestion">

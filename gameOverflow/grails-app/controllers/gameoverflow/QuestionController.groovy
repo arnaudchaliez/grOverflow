@@ -9,7 +9,8 @@ class QuestionController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def questionService
-    def userService
+    def messageService
+    def tagService
 
     @Secured('permitAll')
     def index() {
@@ -24,29 +25,39 @@ class QuestionController {
 
     @Secured('permitAll')
     def show(Question inQuestion) {
-        [question: inQuestion]
+        questionService.viewQuestion(inQuestion)
+
+        [tags: questionService.listTags(inQuestion), answers: questionService.listAnswers(inQuestion), question: inQuestion]
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     def edit(Question inQuestion) {
-        [question: inQuestion]
+        [question: inQuestion, tags: questionService.stringTagsName(inQuestion)]
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     def create() {
         respond new Question(params)
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     @Transactional
     def save(Question inQuestion) {
+        if(params.tags) {
+            questionService.addStringTags(inQuestion, params.tags)
+        }
         processAction(inQuestion, 'insert')
     }
 
     @Transactional
     def update(Question inQuestion) {
+        if(params.tags) {
+            questionService.addStringTags(inQuestion, params.tags)
+        }
         processAction(inQuestion, 'update')
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     @Transactional
     def delete(Question inQuestion) {
         processAction(inQuestion, 'delete')
@@ -64,20 +75,25 @@ class QuestionController {
 
     protected void processAction(Question inQuestion, String inAction)
     {
+
+        //message code associated with the action
+        String strcode = ''
+        //view associated with the action
+        String strview = ''
         switch(inAction)
         {
             case 'insert':
-                String view = 'create'
-                String code = 'default.created.message'
+                strview = 'create'
+                strcode = 'default.created.message'
                 def httpStatus = CREATED
                 break
             case 'update':
-                String view = 'edit'
-                String code = 'default.updated.message'
+                strview = 'edit'
+                strcode = 'default.updated.message'
                 def httpStatus = OK
                 break
             case 'delete':
-                String code = 'default.deleted.message'
+                strcode = 'default.deleted.message'
                 def httpStatus = NO_CONTENT
                 break
         }
@@ -87,12 +103,11 @@ class QuestionController {
             return
         }
 
-        if (inAction != 'delete')
-        {
-            inQuestion = questionService.checkInsertQuestion(inQuestion)
+        if (inAction != 'delete') {
+            inQuestion = messageService.checkInsertMessage(inQuestion)
 
             if (inQuestion.hasErrors()) {
-                respond inQuestion.errors, view:view
+                respond inQuestion.errors, view:strview
                 return
             }
 
@@ -106,8 +121,12 @@ class QuestionController {
         request.withFormat {
 
             form {
-                flash.message = message(code: code, args: [message(code: 'question.label', default: 'Question'), inQuestion.id])
-                redirect inQuestion
+                flash.message = message(code: strcode, args: [message(code: 'question.label', default: 'Question'), inQuestion.id])
+
+                if (inAction != 'delete')
+                    redirect inQuestion
+                else
+                    redirect action:"index", method:"GET"
             }
             '*' { respond inQuestion, [status: httpStatus] }
         }

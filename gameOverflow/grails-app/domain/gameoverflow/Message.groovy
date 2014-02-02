@@ -7,10 +7,11 @@ abstract class Message {
 
     String content
     int score
-    User author
     Date date
 
     List<Message> messages
+
+    static belongsTo = [author: User]
 
     static constraints = {
         content(blank: false, length: 2..2000)
@@ -18,4 +19,5 @@ abstract class Message {
         author(blank: false)
         date(blank: false)
     }
+
 }

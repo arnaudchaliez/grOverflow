@@ -11,9 +11,9 @@ class User {
     String firstname
     String username
     String mail
+    String bio=""
     Date dateRegistration
 
-    /** gameOverflow informations */
     int score
     List<Badge> badges = null
 

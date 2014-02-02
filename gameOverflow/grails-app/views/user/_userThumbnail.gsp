@@ -1,8 +1,14 @@
 
-<div id="user-thumbnail" class="thumbnail col-md-4">
-    <avatar:gravatar email="${user?.mail}" alt="My Avatar" cssClass="myCss" size="50"/>
-    <div class="caption">
-        <h3>${user?.username}</h3>
-        <span>${user?.score}</span>
+<div id="user-thumbnail" class="profile boxed_double">
+    <div class="clearfix">
+        <avatar:gravatar email="${user?.mail}" alt="My Avatar" cssClass="avatar" size="100" />
+        <div class="caption">
+            <h4>${user?.username}</h4>
+            <span class="subtitle">${user?.bio}</span>
+            <span class="number">
+                <strong>${user?.score}</strong>
+                <g:message code="score.label" />
+            </span>
+        </div>
     </div>
 </div>

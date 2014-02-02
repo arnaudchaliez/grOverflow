@@ -4,6 +4,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+        <r:require modules="bootstrapInput, typeahead"/>
 
         <ckeditor:resources />
 	</head>

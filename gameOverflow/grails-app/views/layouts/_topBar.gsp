@@ -1,4 +1,4 @@
-<div class="navbar navbar-default" role="navigation">
+<div class="navbar navbar-default" id="layout-navbar" role="navigation">
     <div class="container">
         <div class="navbar-collapse collapse">
 
@@ -10,11 +10,11 @@
                     <sec:ifLoggedIn>
                         <sec:username />
 
-                        <g:link class="btn btn-default" controller='logout'>Logout</g:link>
+                        <g:link class="btn btn-default" controller='logout'><g:message code="logout.label" /></g:link>
                     </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
-                        <g:link class="btn btn-default" controller='login' action='auth'>Login</g:link>
-                        <g:link class="btn btn-default" controller='login' action='register'>Register</g:link>
+                        <g:link class="btn btn-default" controller='login' action='auth'><g:message code="login.label" /></g:link>
+                        <g:link class="btn btn-default" controller='login' action='register'><g:message code="register.label" /></g:link>
                     </sec:ifNotLoggedIn>
                 </div>
             </div>

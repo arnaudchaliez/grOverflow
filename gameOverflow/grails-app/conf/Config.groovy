@@ -137,3 +137,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 //questions
 gameoverflow.question.max = 100
+
+//tags
+gameoverflow.tag.popularMax = 20

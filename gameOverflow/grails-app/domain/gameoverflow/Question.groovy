@@ -5,8 +5,8 @@ class Question extends Message {
     int views
     String title
 
-    List<Tag> tags
-    List<Answer> answers = null
+    static hasMany = [answers: Answer, tags: Tag]
+    static searchable = true
 
     static constraints = {
         title(title: false)

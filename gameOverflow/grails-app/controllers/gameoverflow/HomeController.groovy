@@ -10,7 +10,6 @@ class HomeController {
     def index() {
         int max = grailsApplication.config.gameoverflow.question.max
         def listRecentQuestions = questionService.listRecentQuestions(max)
-
         [listRecentQuestions: listRecentQuestions]
     }
 }

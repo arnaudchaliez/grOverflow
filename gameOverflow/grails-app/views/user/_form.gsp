@@ -26,7 +26,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'dateRegistration', 'error')} required">
 	<label for="dateRegistration">
-		<g:message code="user.dateRegistration.label" default="Date Inscription" />
+		<g:message code="user.registerDate.label" default="Date Inscription" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:datePicker name="dateRegistration" precision="day"  value="${userInstance?.dateRegistration}"  />
@@ -34,7 +34,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'score', 'error')} required">
 	<label for="score">
-		<g:message code="user.score.label" default="Score" />
+		<g:message code="score.label" default="Score" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="score" type="number" value="${userInstance.score}" required=""/>
