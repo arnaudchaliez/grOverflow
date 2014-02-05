@@ -8,6 +8,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController {
 
+    def userService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     @Secured('permitAll')
@@ -16,10 +18,17 @@ class UserController {
         respond User.list(params), model:[userInstanceCount: User.count()]
     }
 
+    @Secured('permitAll')
     def show(User userInstance) {
-        respond userInstance
+
+        def listQuestions   = userService.listQuestionsUser(userInstance)
+        def listAnswers     = userService.listAnswersUser(userInstance)
+        def listTags        = userService.listTagsUser(userInstance)
+
+        respond userInstance, model:[listQuestions: listQuestions, listAnswers: listAnswers, listTags: listTags]
     }
 
+    @Secured('permitAll')
     def create() {
         respond new User(params)
     }
@@ -40,7 +49,7 @@ class UserController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'userInstance.label', default: 'User'), userInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
                 redirect userInstance
             }
             '*' { respond userInstance, [status: CREATED] }
@@ -67,7 +76,7 @@ class UserController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
                 redirect userInstance
             }
             '*'{ respond userInstance, [status: OK] }
@@ -86,7 +95,7 @@ class UserController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -96,7 +105,7 @@ class UserController {
     protected void notFound() {
         request.withFormat {
             form {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'userInstance.label', default: 'User'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

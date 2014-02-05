@@ -11,6 +11,7 @@ class QuestionController {
     def questionService
     def messageService
     def tagService
+    def voteService
 
     @Secured('permitAll')
     def index() {
@@ -26,6 +27,7 @@ class QuestionController {
     @Secured('permitAll')
     def show(Question inQuestion) {
         questionService.viewQuestion(inQuestion)
+        def canVote = voteService.canUserConnectedVote(inQuestion.id)
 
         [tags: questionService.listTags(inQuestion), answers: questionService.listAnswers(inQuestion), question: inQuestion]
     }

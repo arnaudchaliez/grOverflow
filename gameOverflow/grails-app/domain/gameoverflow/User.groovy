@@ -11,11 +11,20 @@ class User {
     String firstname
     String username
     String mail
-    String bio=""
     Date dateRegistration
 
-    int score
+    /** complementar informations */
+    String bio = ""
+    String website = ""
+    String country = ""
+    String city = ""
+    Date birthday
+
+    int score = 0
+    int gold = 0
     List<Badge> badges = null
+
+    static hasMany = [votes: Vote]
 
     /** security informations */
     String password
@@ -29,6 +38,7 @@ class User {
         firstname(blank: false)
         username(blank: false, size: 3..15, unique: true)
         password (blank: false)
+        birthday(blank: false)
         dateRegistration(blank: false)
     }
 

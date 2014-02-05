@@ -1,4 +1,4 @@
-<%@ page import="gameoverflow.Question" %>
+<%@ page import="gameoverflow.Vote; gameoverflow.Question" %>
 <%@ page import="gameoverflow.Answer" %>
 
 <!DOCTYPE html>
@@ -47,11 +47,17 @@
                                 <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                             </fieldset>
                         </g:form>
+
+
+                    <g:link controller="message" action="vote" id="${question.id}" params='[type:  "${ Vote.Type.UP }", idQuestion: "${question.id}", message: "question" ]'>
                         <span class="show-question-up glyphicon glyphicon-arrow-up"></span>
-                        <span id="show-question-score">
+                    </g:link>
+                    <span id="show-question-score">
                             ${question?.score}
-                        </span>
+                    </span>
+                    <g:link controller="message" action="vote" id="${question.id}" params='[type:  "${ Vote.Type.DOWN }", idQuestion: "${question.id}", message: "question" ]'>
                         <span class="show-question-down glyphicon glyphicon-arrow-down"></span>
+                    </g:link>
 
                 </div>
             </div>

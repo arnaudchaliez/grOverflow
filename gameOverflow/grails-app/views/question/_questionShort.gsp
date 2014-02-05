@@ -17,7 +17,7 @@
     </td>
     <td>
         <span class="number">
-            <strong>${question?.score}</strong>
+            <strong>${question?.votes?.size()}</strong>
             <g:message code="score.label" default="Score" />
         </span>
     </td>

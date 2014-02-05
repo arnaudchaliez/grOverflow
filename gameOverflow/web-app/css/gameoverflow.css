@@ -287,7 +287,7 @@ a:hover {
     color: #999;
 }
 
-#show-question-title  {
+#show-question-title, #show-user-title  {
     padding-top: 16px;
     position: relative;
     left: -34px;

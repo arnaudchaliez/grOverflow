@@ -18,6 +18,39 @@ class UserService {
         return User.get(inUsername)
     }
 
+    /**
+     * return the top users.
+     * @param number limit the users returned
+     */
+    def listTopUsers(int inMax) {
+        def users = User.findAllByMailIsNotNull(sort: "score", order: "desc", max: inMax)
+        return users.toList()
+    }
+
+    /**
+     * return the questions associated to the user.
+     * @param User user to get the questions
+     */
+    def listQuestionsUser(User user) {
+        return Question.findAllByAuthor(user);
+    }
+
+    /**
+     * return the answers associated to the user.
+     * @param User user to get the questions
+     */
+    def listAnswersUser(User user) {
+        return Answer.findAllByAuthor(user);
+    }
+
+    /**
+     * return the tags associated to the user.
+     * @param User user to get the questions
+     */
+    def listTagsUser(User user) {
+        return Tag.findAllByAuthor(user);
+    }
+
     def getUserConnected()
     {
         User user = null

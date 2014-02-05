@@ -10,11 +10,11 @@ class BootStrap {
         def roleAdmin = new Role(authority: 'ROLE_ADMIN').save(failOnError:true)
         def roleUser = new Role(authority: 'ROLE_USER').save(failOnError:true)
 
-        def userAdmin = new User(username: 'admin', dateRegistration: new Date(), password: 'admin', lastname: 'admin', firstname: 'admin', mail:'arnaudchlz@gmail.com', enabled: true)
+        def userAdmin = new User(username: 'admin', dateRegistration: new Date(), birthday: new Date(), bio: ':)', password: 'admin', lastname: 'admin', firstname: 'admin', mail: 'arnaudchlz@gmail.com', enabled: true)
         userAdmin.save(failOnError:true)
-        def userKinoko = new User(username: 'Kinoko', dateRegistration: new Date(), password: 'kinoko', lastname: 'Chaliez', firstname: 'Arnaud', mail:'arnaudchlz@gmail.com', enabled: true)
+        def userKinoko = new User(username: 'Kinoko', dateRegistration: new Date(), birthday: new Date(), bio: ':)', password: 'kinoko', lastname: 'Chaliez', firstname: 'Arnaud', mail: 'arnaudchlzd@gmail.com', enabled: true)
         userKinoko.save(failOnError:true)
-        def userBondika = new User(username: 'Bondika', dateRegistration: new Date(), password: 'bondika', lastname: 'Bouny', firstname: 'Jérémy', mail:'bondika@truc.com', enabled: true)
+        def userBondika = new User(username: 'Bondika', dateRegistration: new Date(), birthday: new Date(), password: 'bondika', lastname: 'Bouny', firstname: 'Jérémy', mail: 'bondika@truc.com', enabled: true)
         userBondika.save(failOnError:true)
 
         UserRole.create(userAdmin, roleAdmin)

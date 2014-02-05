@@ -9,6 +9,7 @@ class QuestionService {
 
     def userService
     def tagService
+    def grailsApplication
 
     /**
      * return all the questions.
@@ -143,9 +144,12 @@ class QuestionService {
         return question
     }
 
-    def updateScore(int inId, int inScore) {
+    def updateScore(int inId, Vote.Type inType) {
         def question = Question.get(inId)
-        question.score += inScore
-    }
+        int weight = grailsApplication.config.gameoverflow.question.vote.weight
+        if (inType == Vote.Type.DOWN)
+            weight *= -1
 
+        question.score += weight
+    }
 }

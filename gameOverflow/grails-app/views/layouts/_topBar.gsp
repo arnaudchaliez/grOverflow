@@ -9,12 +9,13 @@
                 <div class="col-xs-2">
                     <sec:ifLoggedIn>
                         <sec:username />
+                        ${sec.lastname()}
 
                         <g:link class="btn btn-default" controller='logout'><g:message code="logout.label" /></g:link>
                     </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
                         <g:link class="btn btn-default" controller='login' action='auth'><g:message code="login.label" /></g:link>
-                        <g:link class="btn btn-default" controller='login' action='register'><g:message code="register.label" /></g:link>
+                        <g:link class="btn btn-default" controller='user' action='create'><g:message code="register.label" /></g:link>
                     </sec:ifNotLoggedIn>
                 </div>
             </div>

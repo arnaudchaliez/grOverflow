@@ -14,7 +14,11 @@
                     </g:link>
                 </div>
                 <div class="col-xs-2">
-                    <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="profil.label" default="Profil" /></button>
+                    <sec:ifLoggedIn>
+                        <g:link controller="user" action="show" id="${idUser}">
+                            <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="profil.label" default="Profil" /></button>
+                        </g:link>
+                    </sec:ifLoggedIn>
                 </div>
                 <div class="col-xs-2 col-md-offset-2">
                     <g:link controller="question" action="create">
@@ -31,12 +35,12 @@
             <div class="row">
                 <div class="col-xs-8">
                     <div class="panel panel-default">
-                        <div class="panel-heading">><g:message code="questions.recent" default="Recent questions" /></div>
+                        <div class="panel-heading"><g:message code="questions.recent" default="Recent questions" /></div>
 
                         <ul class="list-group">
                             <g:each in="${listRecentQuestions}" var="currentQuestion">
                                 <li class="list-group-item">
-                                    <g:render template="/question/questionShort" collection="${currentQuestion}" />
+                                    <g:render template="/question/questionShort" collection="${currentQuestion}" var="question" />
                                 </li>
                             </g:each>
                         </ul>
@@ -44,11 +48,13 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Available Controllers</div>
+                        <div class="panel-heading"><g:message code="users.top" default="Top users" /></div>
 
                         <ul class="list-group">
-                            <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                                <li class="list-group-item"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
+                            <g:each in="${listTopUsers}" var="currentUser">
+                                <li class="list-group-item">
+                                    <g:render template="/user/userThumbnail" collection="${currentUser}" var="user" />
+                                </li>
                             </g:each>
                         </ul>
                     </div>
