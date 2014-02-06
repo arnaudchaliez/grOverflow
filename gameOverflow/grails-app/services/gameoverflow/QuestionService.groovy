@@ -2,6 +2,7 @@ package gameoverflow
 
 import gameoverflow.Question
 import grails.transaction.Transactional
+import jline.internal.Log
 import org.springframework.security.core.context.SecurityContextHolder
 
 @Transactional
@@ -9,6 +10,7 @@ class QuestionService {
 
     def userService
     def tagService
+    def messageService
     def grailsApplication
 
     /**
@@ -101,16 +103,6 @@ class QuestionService {
             inQuestion.views++
     }
 
-    /**
-     * add an answer to the question in parameter and validate it.
-     * @param Question question to add the answer
-     * @param Answer answer to the question
-     */
-    def addAnswer(Question inQuestion, Answer inAnswer) {
-        inAnswer.question = inQuestion
-        inAnswer.validate()
-        inAnswer.save(failOnError: true)
-    }
 
     /**
      * add tags to th question from a string (tag1[, tag2[, tag 3] ...]) .
@@ -134,4 +126,19 @@ class QuestionService {
 
         question.score += weight
     }
+
+    def addQuestion(Question inQuestion) {
+        messageService.checkInsertMessage(inQuestion)
+
+        if (inQuestion.hasErrors()) {
+            Log.error('error creating question, question still have errors :')
+            Log.error(inQuestion)
+            return -1
+        } else {
+            inQuestion.save(failOnError: true)
+        }
+
+        return 0
+    }
+
 }

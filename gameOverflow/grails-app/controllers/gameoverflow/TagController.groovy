@@ -10,7 +10,7 @@ class TagController {
     def index() {}
 
     def popularTags() {
-        int max = grailsApplication.config.gameoverflow.tag..popularMax
+        int max = grailsApplication.config.gameoverflow.tag.popularMax
         def tagsList = tagService.listPopularTags(max)
 
         withFormat {

@@ -11,8 +11,9 @@ import static org.springframework.http.HttpStatus.OK
 
 class AnswerController {
 
-    def MessageService
-    def QuestionService
+    def messageService
+    def questionService
+    def answerService
 
     def index() {}
 
@@ -89,22 +90,13 @@ class AnswerController {
         }
 
         if (inAction != 'delete') {
-            inAnswer = messageService.checkInsertMessage(inAnswer)
-
-            questionService.addAnswer(inQuestion, inAnswer)
-
-            if (inAnswer.hasErrors()) {
-                Log.error('error creating answer, answer still have errors :')
-                Log.error(inAnswer)
+            if ( answerService.addAnswer(inQuestion, inAnswer)==-1 ) {
                 respond inAnswer.errors, view:strview
-                return
             }
-
-            inAnswer.save(failOnError: true, flush:true)
         }
         else
         {
-            inAnswer.delete(failOnError: true, flush:true)
+            messageService.deleteAnswer(inAnswer)
         }
 
         request.withFormat {
@@ -121,5 +113,7 @@ class AnswerController {
         }
 
     }
+
+
 
 }

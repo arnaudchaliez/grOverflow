@@ -106,18 +106,13 @@ class QuestionController {
         }
 
         if (inAction != 'delete') {
-            inQuestion = messageService.checkInsertMessage(inQuestion)
-
-            if (inQuestion.hasErrors()) {
-                respond inQuestion.errors, view:strview
-                return
+            if ( questionService.addQuestion(inQuestion)==-1 ) {
+                respond inAnswer.errors, view:strview
             }
-
-            inQuestion.save(failOnError: true, flush:true)
         }
         else
         {
-            inQuestion.delete(failOnError: true, flush:true)
+            messageService.deleteMessage(inQuestion)
         }
 
         request.withFormat {
