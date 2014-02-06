@@ -8,7 +8,7 @@
     <g:textField name="title" required="" value="${question?.title}"/>
 </div>
 
-<ckeditor:editor name="content" height="400px" width="80%">
+<ckeditor:editor name="content" height="400px" width="100%">
     ${question?.content}
 </ckeditor:editor>
 

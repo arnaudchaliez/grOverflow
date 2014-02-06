@@ -2,7 +2,7 @@
 <%@ page import="gameoverflow.Answer" %>
 
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
@@ -71,7 +71,23 @@
                 <div id="answers-list">
                         <ol>
                             <g:each in="${answers}" status="i" var="currentAnswer">
-                                <g:render template="/answer/answerBloc" collection="${currentAnswer}" />
+
+                                <g:render template="/answer/answerBloc" collection="${currentAnswer}" var="answer" />
+
+                                <div class="hidden" id="show-question-commentform-${currentAnswer.id}">
+                                    <g:form url="[resource: comment, controller:'comment', action:'save']" >
+                                        <fieldset class="form">
+                                            <g:render template="/comment/form" />
+                                        </fieldset>
+
+                                        <g:hiddenField name="messageId" value="${currentAnswer.id}" />
+                                        <g:hiddenField name="questionId" value="${question.id}" />
+                                    </g:form>
+                                </div>
+
+                                <g:each in="${currentAnswer.comments}"  var="currentComment">
+                                    <g:render template="/comment/commentBloc" collection="${currentComment}" var="comment" />
+                                </g:each>
                             </g:each>
                         </ol>
                 </div>

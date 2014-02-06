@@ -15,5 +15,6 @@ class Tag {
     static belongsTo = [Question]
 
     static constraints = {
+        description(length: 0..800)
     }
 }

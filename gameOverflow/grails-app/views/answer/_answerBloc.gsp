@@ -12,6 +12,30 @@
                 <!-- TODO SECURITY !! , sanitizer ?  -->
                 ${raw(answer?.content)}
             </div>
+            <div class="comment-footer">
+
+                <div id='show-question-commentlink-${answer.id}'>
+                    <g:message code="comment.add" />
+                </div>
+
+
+            </div>
         </div>
     </div>
 </li>
+
+<g:javascript>
+    $('#show-question-commentlink-${answer.id}').click(
+
+        function() {
+            console.log("click - #show-question-commentform-${answer.id}");
+            var form = $('#show-question-commentform-${answer.id}');
+            if( form.hasClass('hidden') ){
+                form.removeClass('hidden');
+            }
+            else {
+                form.addClass('hidden');
+            }
+        }
+    );
+</g:javascript>

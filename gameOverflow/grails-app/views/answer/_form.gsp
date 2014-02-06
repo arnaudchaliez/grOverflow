@@ -2,7 +2,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: answer, field: 'title', 'error')} required">
 
-    <ckeditor:editor name="content" height="400px" width="80%">
+    <ckeditor:editor id="answerCKEditor" name="content" height="200px" width="100%">
         ${answer?.content}
     </ckeditor:editor>
 

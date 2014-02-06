@@ -34,29 +34,40 @@
 
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><g:message code="questions.recent" default="Recent questions" /></div>
+                    <div id="index-questions" class="panel panel-default">
+                        <div id="index-questions-title" class="panel-heading">
+                            <g:message code="questions.recent" default="Recent questions" />
+                        </div>
 
-                        <ul class="list-group">
-                            <g:each in="${listRecentQuestions}" var="currentQuestion">
-                                <li class="list-group-item">
-                                    <g:render template="/question/questionShort" collection="${currentQuestion}" var="question" />
-                                </li>
-                            </g:each>
-                        </ul>
+                        <div id="index-questions-content">
+                            <ul>
+                                <g:each in="${listRecentQuestions}" var="currentQuestion">
+                                    <li>
+                                        <g:render template="/question/questionShort" collection="${currentQuestion}" var="question" />
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><g:message code="users.top" default="Top users" /></div>
+                    <div id="index-highscore" class="panel panel-default">
+                        <div id="index-highscore-title" class="panel-heading">
+                            <g:message code="highscore.title" />
+                        </div>
 
-                        <ul class="list-group">
-                            <g:each in="${listTopUsers}" var="currentUser">
-                                <li class="list-group-item">
-                                    <g:render template="/user/userThumbnail" collection="${currentUser}" var="user" />
-                                </li>
-                            </g:each>
-                        </ul>
+                        <div id="index-highscore-content" class="panel-body">
+                            <ul>
+                                <g:each in="${listTopUsers}" status="i" var="currentUser">
+                                    <li>
+                                        <span id="user-raw">
+                                            <span>${i+1}.</span>
+                                            <g:render template="/user/userRaw" collection="${currentUser}" var="user" />
+                                        </span>
+                                    </li>
+                                </g:each>
+                            </ul>
+                         </div>
                     </div>
                 </div>
             </div>

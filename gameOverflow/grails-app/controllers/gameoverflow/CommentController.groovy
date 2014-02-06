@@ -9,55 +9,62 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
 
-class AnswerController {
+class CommentController {
 
     def MessageService
     def QuestionService
 
-    def index() {}
-
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
-    def edit(Answer inAnswer) {
-        [answer: inAnswer]
+    def edit(Comment inComment) {
+        [comment: inComment]
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     def create() {
-        respond new Answer(params)
+        respond new Comment(params)
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     @Transactional
-    def save(Answer inAnswer) {
+    def save(Comment inComment) {
+        Message message = messageService.getMessage(Integer.parseInt(params.messageId))
         Question question = questionService.getQuestion(Integer.parseInt(params.questionId))
-        processAction(inAnswer, 'insert', question)
+
+        println(message)
+        println(question)
+
+        processAction(inComment, 'insert', question,  message)
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     @Transactional
-    def update(Answer inAnswer) {
+    def update(Comment inComment) {
+        Message message = messageService.getMessage(Integer.parseInt(params.messageId))
         Question question = questionService.getQuestion(Integer.parseInt(params.questionId))
-        processAction(inAnswer, 'update')
+
+        processAction(inComment, 'update', question)
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     @Transactional
-    def delete(Answer inAnswer) {
+    def delete(Comment inComment) {
+        Message message = messageService.getMessage(Integer.parseInt(params.messageId))
         Question question = questionService.getQuestion(Integer.parseInt(params.questionId))
-        processAction(inAnswer, 'delete')
+
+        processAction(inComment, 'delete', question)
     }
 
     protected void notFound() {
         request.withFormat {
             form {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'answer.label', default: 'Answer'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'comment.label', default: 'Comment'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
         }
     }
 
-    protected void processAction(Answer inAnswer, String inAction, Question inQuestion = null)
+    protected void processAction(Comment inComment, String inAction, Question inQuestion, Message inMessage = null)
     {
 
         //message code associated with the action
@@ -82,42 +89,33 @@ class AnswerController {
                 break
         }
 
-        if (inAnswer == null) {
-            Log.error('error creating answer, processAction (' + inAction + ') object is null')
+        if (inComment == null) {
+            Log.error('error creating comment, processAction (' + inAction + ') object is null')
             notFound()
             return
         }
 
         if (inAction != 'delete') {
-            inAnswer = messageService.checkInsertMessage(inAnswer)
-
-            questionService.addAnswer(inQuestion, inAnswer)
-
-            if (inAnswer.hasErrors()) {
-                Log.error('error creating answer, answer still have errors :')
-                Log.error(inAnswer)
-                respond inAnswer.errors, view:strview
-                return
+            if ( messageService.addComment(inMessage, inComment)==-1 ) {
+                respond inComment.errors, view:strview
             }
-
-            inAnswer.save(failOnError: true, flush:true)
         }
         else
         {
-            inAnswer.delete(failOnError: true, flush:true)
+            messageService.deleteMessage(inComment)
         }
 
         request.withFormat {
 
             form {
-                flash.message = message(code: strcode, args: [message(code: 'answer.label', default: 'Answer'), inAnswer.id])
+                flash.message = message(code: strcode, args: [message(code: 'comment.label', default: 'Comment'), inComment.id])
 
                 if (inAction != 'delete')
                     redirect inQuestion
                 else
                     redirect action:"index", method:"GET"
             }
-            '*' { respond inAnswer, [status: httpStatus] }
+            '*' { respond inComment, [status: httpStatus] }
         }
 
     }

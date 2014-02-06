@@ -68,7 +68,6 @@ class QuestionService {
      */
     def listAnswers(Question inQuestion) {
         def answers = inQuestion.answers.toList()
-
         return answers
     }
 
@@ -108,9 +107,9 @@ class QuestionService {
      * @param Answer answer to the question
      */
     def addAnswer(Question inQuestion, Answer inAnswer) {
-
         inAnswer.question = inQuestion
         inAnswer.validate()
+        inAnswer.save(failOnError: true)
     }
 
     /**
@@ -125,23 +124,6 @@ class QuestionService {
             inQuestion.addToTags(tag)
             tag.addToQuestions(inQuestion)
         }
-    }
-
-    //TODO remove
-    def addQuestion(String inTitle, String inContent, User inAuthor) {
-
-        Question question = new Question(
-                title: inTitle,
-                content: inContent,
-                date: new Date(),
-                author: inAuthor,
-                answers: null,
-                messages: null,
-                score: 0,
-                tags: null
-
-        ).save(failOnError: true)
-        return question
     }
 
     def updateScore(int inId, Vote.Type inType) {

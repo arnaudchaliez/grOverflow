@@ -1,5 +1,8 @@
 package gameoverflow
 
+import grails.plugin.springsecurity.annotation.Secured
+import grails.transaction.Transactional
+
 class MessageController {
 
     def voteService
@@ -14,5 +17,12 @@ class MessageController {
         questionService.updateScore(id, vote.type)
 
         redirect(controller:'question', action:'show', id: params.idQuestion)
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
+    @Transactional
+    def comment(Message inMessage) {
+        Message message = messageService.getMessage(Integer.parseInt(params.messageId))
+        processAction(inAnswer, 'insert', question)
     }
 }
