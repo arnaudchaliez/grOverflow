@@ -28,6 +28,7 @@ class QuestionController {
     def show(Question inQuestion) {
         questionService.viewQuestion(inQuestion)
         def canVote = voteService.canUserConnectedVote(inQuestion.id)
+        println(canVote)
 
         [tags: questionService.listTags(inQuestion), answers: questionService.listAnswers(inQuestion), question: inQuestion]
     }

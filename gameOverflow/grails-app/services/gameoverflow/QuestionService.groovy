@@ -118,14 +118,14 @@ class QuestionService {
         }
     }
 
-    def updateScore(int inId, Vote.Type inType) {
+    /*def updateScore(int inId, Vote.Type inType) {
         def question = Question.get(inId)
         int weight = grailsApplication.config.gameoverflow.question.vote.weight
         if (inType == Vote.Type.DOWN)
             weight *= -1
 
         question.score += weight
-    }
+    }*/
 
     def addQuestion(Question inQuestion) {
         messageService.checkInsertMessage(inQuestion)

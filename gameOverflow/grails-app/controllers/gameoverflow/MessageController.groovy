@@ -7,14 +7,20 @@ class MessageController {
 
     def voteService
     def questionService
+    def messageService
 
     def vote() {
         log.info('vote action called')
         log.debug('vote type:' + params.type)
 
-        int id = Integer.parseInt(params.id)
-        def vote = voteService.createVote(id, params.type)
-        questionService.updateScore(id, vote.type)
+        if(params.id && params.type) {
+            int id = Integer.parseInt(params.id)
+            def vote = voteService.createVote(id, params.type)
+            messageService.updateScore(id, vote.type)
+        }
+        else {
+            log.error('action vote called with an id or a vote type null ')
+        }
 
         redirect(controller:'question', action:'show', id: params.idQuestion)
     }

@@ -67,4 +67,15 @@ class MessageService {
         inMessage.delete(failOnError: true, flush:true)
     }
 
+    def updateScore(int inId, Vote.Type inType) {
+        def message = Message.get(inId)
+        int weight = 1
+        if (inType == Vote.Type.DOWN)
+            weight *= -1
+
+        userService.updateScore(message.author, 1)
+
+        message.score += weight
+    }
+
 }

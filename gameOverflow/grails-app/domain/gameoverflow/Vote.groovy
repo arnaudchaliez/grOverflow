@@ -4,7 +4,8 @@ class Vote {
 
     enum Type{
         UP,
-        DOWN
+        DOWN,
+        VALIDATE
     }
 
     Type type

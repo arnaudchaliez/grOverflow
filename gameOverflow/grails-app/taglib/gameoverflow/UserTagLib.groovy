@@ -26,7 +26,7 @@ class UserTagLib {
         def user = userService.userConnected
 
         if(user) {
-            out << render(template:"/user/userThumbnailMini", model:[user: user])
+            out << render(template:"/user/userThumbnailNav", model:[user: user])
         }
     }
 

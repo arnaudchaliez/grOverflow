@@ -7,7 +7,7 @@
             </g:link>
 
             <span class="score">
-                Score
+                <g:message code="score.label" />
                 <strong>${user?.score}</strong>
             </span>
         </div>

@@ -12,6 +12,10 @@
                     <strong>${user.score}</strong>
                     <g:message code="score.label" />
                 </span>
+                <span class="number">
+                    <strong>${user.gold}</strong>
+                    <g:message code="gold.label" />
+                </span>
             </div>
         </div>
     </div>

@@ -48,16 +48,9 @@
                             </fieldset>
                         </g:form>
 
-
-                    <g:link controller="message" action="vote" id="${question.id}" params='[type:  "${ Vote.Type.UP }", idQuestion: "${question.id}", message: "question" ]'>
-                        <span class="show-question-up glyphicon glyphicon-arrow-up"></span>
-                    </g:link>
-                    <span id="show-question-score">
-                            ${question?.score}
-                    </span>
-                    <g:link controller="message" action="vote" id="${question.id}" params='[type:  "${ Vote.Type.DOWN }", idQuestion: "${question.id}", message: "question" ]'>
-                        <span class="show-question-down glyphicon glyphicon-arrow-down"></span>
-                    </g:link>
+                    <g:voteForm idMessage="${question.id}" type="question">
+                        ${question?.score}
+                    </g:voteForm>
 
                 </div>
             </div>

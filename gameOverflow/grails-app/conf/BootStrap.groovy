@@ -1,3 +1,4 @@
+import gameoverflow.Badge
 import gameoverflow.Comment
 import gameoverflow.User
 import gameoverflow.Question
@@ -90,6 +91,25 @@ class BootStrap {
         )
         c1.save(failOnError: true)
 
+
+        /** badges */
+
+        Badge b1 = new Badge(
+            category: Badge.Category.SHOP,
+            name: "CakeLie",
+            description: "The cake is a lie",
+            picture: 'cakePortal.png',
+            price: 9999999
+        )
+        b1.save(failOnError: true)
+
+        Badge b2 = new Badge(
+                category: Badge.Category.ANSWER,
+                name: "Navi",
+                description: "Hey listen !",
+                picture: 'naviZelda.png'
+        )
+        b2.save(failOnError: true)
 
     }
     def destroy = {

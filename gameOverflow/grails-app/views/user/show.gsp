@@ -81,6 +81,9 @@
                     <a href="#answers" data-toggle="tab"><g:message code="answers.label" /></a>
                 </li>
                 <li>
+                    <a href="#tags" data-toggle="tab"><g:message code="tags.label" /></a>
+                </li>
+                <li>
                     <a href="#badges" data-toggle="tab"><g:message code="badges.label" /></a>
                 </li>
             </ul>
@@ -101,6 +104,15 @@
                         <g:each in="${listAnswers}" status="i" var="currentAnswer">
                             <ul>
                                 ${currentAnswer}
+                            </ul>
+                        </g:each>
+                    </ol>
+                </div>
+                <div class="tab-pane" id="tags">
+                    <ol>
+                        <g:each in="${listTags}" status="i" var="currentTag">
+                            <ul>
+                                ${currentTag}
                             </ul>
                         </g:each>
                     </ol>

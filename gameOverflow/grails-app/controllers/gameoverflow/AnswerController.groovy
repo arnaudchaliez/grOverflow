@@ -15,7 +15,6 @@ class AnswerController {
     def questionService
     def answerService
 
-    def index() {}
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     def edit(Answer inAnswer) {
@@ -30,8 +29,13 @@ class AnswerController {
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     @Transactional
     def save(Answer inAnswer) {
-        Question question = questionService.getQuestion(Integer.parseInt(params.questionId))
-        processAction(inAnswer, 'insert', question)
+        if (params.questionId) {
+            Question question = questionService.getQuestion(Integer.parseInt(params.questionId))
+            processAction(inAnswer, 'insert', question)
+        }
+        else {
+            redirect controller:"home", method:"GET"
+        }
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )

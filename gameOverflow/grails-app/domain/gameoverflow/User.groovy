@@ -22,9 +22,8 @@ class User {
 
     int score = 0
     int gold = 0
-    List<Badge> badges = null
 
-    static hasMany = [votes: Vote]
+    static hasMany = [votes: Vote, badges: Badge]
 
     /** security informations */
     String password

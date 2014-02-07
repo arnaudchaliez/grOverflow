@@ -60,4 +60,8 @@ class UserService {
         return user
     }
 
+    def updateScore(User inUser, int inWeight) {
+       inUser.score += inWeight
+       inUser.gold += 10 * inWeight
+    }
 }

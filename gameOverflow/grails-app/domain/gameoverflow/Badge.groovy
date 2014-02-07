@@ -6,7 +6,8 @@ class Badge {
         CONNEXION,
         QUESTION,
         COMMENT,
-        ANSWER
+        ANSWER,
+        SHOP
     }
 
     String name
@@ -14,6 +15,8 @@ class Badge {
     String picture
     Category category
     int price = 0
+
+    static hasMany = User
 
     static constraints = {
         name(blank: false)
