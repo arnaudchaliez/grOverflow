@@ -98,19 +98,22 @@ class BootStrap {
             category: Badge.Category.SHOP,
             name: "CakeLie",
             description: "The cake is a lie",
-            picture: 'cakePortal.png',
+            picture: 'cakePortal.jpg',
             price: 9999999
         )
         b1.save(failOnError: true)
 
         Badge b2 = new Badge(
-                category: Badge.Category.ANSWER,
+                category: Badge.Category.SHOP,
                 name: "Navi",
                 description: "Hey listen !",
-                picture: 'naviZelda.png'
+                picture: 'naviZelda.jpg',
+                price: 10
         )
         b2.save(failOnError: true)
 
+        userKinoko.addToBadges(b1)
+        userKinoko.save()
     }
     def destroy = {
     }

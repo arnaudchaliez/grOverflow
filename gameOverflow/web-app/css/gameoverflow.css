@@ -478,7 +478,18 @@ a:hover {
     }
 }
 
+#badge-shop-thumbnail.thumbnail {
+    width: 250px;
+}
 
+.coins {
+    padding-right: 20px;
+    float:right;
+    background-image: url(/images/coin.gif) ;
+    background-size: 19px auto;
+    background-position: right;
+    background-repeat: no-repeat;
+}
 /*-----------------------------------*/
 /* Comments */
 /*-----------------------------------*/
