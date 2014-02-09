@@ -6,6 +6,20 @@ This application was conducted as part of a web development project (3rd year IS
 
 The project idea was not to make a true copy of Stack Overflow but to adapt the concept to the universe of video games while keeping the key features of Stack Overflow to respond to expectations of this project. 
 
+Features
+==========
+
+* Register / Login / Logout
+* Ask Question
+* Answer to question
+* Comment a question or an answer
+* Vote to Question, Answer, Comment
+* Tags questions, see questions by tag
+* Buy Badges (the link is not present yet, access by badge/shop)
+* See profile users (Informations, questions, answers, tags and badges)
+* I18n (French)
+
+
 UML
 ==========
 
@@ -53,4 +67,10 @@ Overview
 
 ![](/img/shop.png)
 
+**Profil (French)**
 
+![](/img/profil.png)
+
+**Popular Tags (French)**
+
+![](/img/populartags.png)
