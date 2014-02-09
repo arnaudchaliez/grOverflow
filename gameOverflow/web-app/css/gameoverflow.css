@@ -74,7 +74,7 @@ html {font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100
     width: 396px;
     height: 30px;
     padding: 8px 12px;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 30px;
     border: 2px solid #ccc;
     -webkit-border-radius: 8px;
@@ -136,40 +136,6 @@ html {font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100
     font-size: 14px;
 }
 
-/* example specific styles */
-/* ----------------------- */
-
-.example-twitter-oss .tt-suggestion {
-    padding: 8px 20px;
-}
-
-.example-twitter-oss .tt-suggestion + .tt-suggestion {
-    border-top: 1px solid #ccc;
-}
-
-.example-twitter-oss .repo-language {
-    float: right;
-    font-style: italic;
-}
-
-.example-twitter-oss .repo-name {
-    font-weight: bold;
-}
-
-.example-twitter-oss .repo-description {
-    font-size: 14px;
-}
-
-.example-sports .league-name {
-    margin: 0 20px 5px 20px;
-    padding: 3px 0;
-    border-bottom: 1px solid #ccc;
-}
-
-.example-arabic .tt-dropdown-menu {
-    text-align: right;
-}
-
 /**
 general
 */
@@ -199,6 +165,12 @@ a:hover, a:focus {
 .panel-heading {
     font-family: "visitor", sans-serif;
     font-size: 20px;
+}
+
+.panel-content {
+    background: #444444;
+    color: #FFFFFF;
+    padding : 10px;
 }
 
 .navbar, #index-questions, #index-questions a {
@@ -302,6 +274,12 @@ a:hover {
 {
     margin-top: 20px;
     padding:10px;
+    position:relative;
+}
+#show-question-content .actions
+{
+    text-align: right;
+    pading-top : 5px;
 }
 
 #show-question-content .well
@@ -335,7 +313,7 @@ a:hover {
     border-radius: 8px;
     -webkit-box-shadow: 0 1px 1px rgba(224,222,220,0.75);
     box-shadow: 0 1px 1px rgba(224,222,220,0.75);
-    margin-bottom: 50px;
+    margin-bottom: 5px;
     position: relative;
     z-index: 0;
 }
@@ -655,6 +633,10 @@ a:hover {
     background-color: #91bb25;
 }
 
+.cke_editor_content {
+    border: none !important;
+    padding: 5px 0px !important;
+}
 
 /*-----------------------------------*/
 /* Badges */

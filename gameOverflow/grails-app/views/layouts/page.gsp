@@ -15,7 +15,7 @@
             </div>
             <div class="col-xs-2">
                 <sec:ifLoggedIn>
-                    <g:link controller="user" action="show" id="${idUser}">
+                    <g:link controller="user" action="show" id="${sec.loggedInUserInfo(field: 'id')}">
                         <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="profil.label" default="Profil" /></button>
                     </g:link>
                 </sec:ifLoggedIn>

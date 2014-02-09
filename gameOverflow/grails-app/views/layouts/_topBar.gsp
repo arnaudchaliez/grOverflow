@@ -4,8 +4,8 @@
             <div class="col-xs-8">
                 <div id="gameOverFlowLogo" role="banner"><a href="/gameOverflow"><img src="${resource(dir: 'images', file: 'logo_title.png')}" alt="GameOverFlow"/></a></div>
             </div>
-        <div class="col-xs-4 right">
-            <sec:ifLoggedIn>
+            <div class="col-xs-4 right">
+                <sec:ifLoggedIn>
                     <g:renderUser />
                     <g:link class="btn btn-default" controller='logout'><g:message code="logout.label" /></g:link>
                 </sec:ifLoggedIn>

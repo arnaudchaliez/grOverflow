@@ -5,7 +5,7 @@
         <g:message code="title.label" default="title" />
         <span class="required-indicator">*</span>
     </label>
-    <g:textField name="title" required="" value="${question?.title}"/>
+    <g:textField name="title" class="form-control" required="" value="${question?.title}"/>
 </div>
 
 <ckeditor:editor name="content" height="400px" width="100%">
