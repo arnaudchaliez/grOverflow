@@ -7,7 +7,7 @@ import spock.lang.Specification
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
 @TestFor(AnswerController)
-class AnswerControllerSpec extends Specification {
+class   AnswerControllerSpec extends Specification {
 
     def setup() {
     }

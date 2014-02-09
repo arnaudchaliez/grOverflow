@@ -1,6 +1,10 @@
 package gameoverflow
 
 import grails.transaction.Transactional
+import jline.internal.Log
+import org.springframework.security.core.context.SecurityContextHolder
+import security.Role
+import security.UserRole
 
 @Transactional
 class UserService {
@@ -48,6 +52,10 @@ class UserService {
         return Tag.findAllByAuthor(user);
     }
 
+    def listBadgesUser(User user) {
+        return user.getBadges()
+    }
+
     def getUserConnected()
     {
         User user = null
@@ -60,5 +68,29 @@ class UserService {
     def updateScore(User inUser, int inWeight) {
        inUser.score += inWeight
        inUser.gold += 10 * inWeight
+    }
+
+    def registerUser(User inUser) {
+        inUser.dateRegistration = new Date()
+        inUser.validate()
+        if (inUser.hasErrors()) {
+            log.error('error registering user, user still have errors :')
+            log.error(inUser)
+            return -1
+        } else {
+            def role = Role.findByAuthority('ROLE_USER')
+
+            if (role) {
+                inUser.save(failOnError: true)
+
+                UserRole.create(inUser, role)
+            }
+            else {
+                log.error('error registering user, role ROLE_USER not found.')
+                return -2
+            }
+        }
+
+        return 0
     }
 }

@@ -24,8 +24,9 @@ class UserController {
         def listQuestions   = userService.listQuestionsUser(userInstance)
         def listAnswers     = userService.listAnswersUser(userInstance)
         def listTags        = userService.listTagsUser(userInstance)
+        def listBadges      = userService.listBadgesUser(userInstance)
 
-        respond userInstance, model:[listQuestions: listQuestions, listAnswers: listAnswers, listTags: listTags]
+        respond userInstance, model:[listQuestions: listQuestions, listAnswers: listAnswers, listBadges: listBadges, listTags: listTags]
     }
 
     @Secured('permitAll')
@@ -33,73 +34,76 @@ class UserController {
         respond new User(params)
     }
 
+    @Secured('permitAll')
+    def save(User inUser) {
+        processAction(inUser, 'insert')
+    }
+
     @Transactional
-    def save(User userInstance) {
-        if (userInstance == null) {
+    def update(User inUser) {
+        processAction(inUser, 'update')
+    }
+
+    @Transactional
+    def delete(User inUser) {
+        processAction(inUser, 'delete')
+    }
+
+    @Secured('permitAll')
+    @Transactional
+    protected void processAction(User inUser, String inAction)
+    {
+
+        //message code associated with the action
+        String strcode = ''
+        //view associated with the action
+        String strview = ''
+        switch(inAction)
+        {
+            case 'insert':
+                strview = 'create'
+                strcode = 'default.created.message'
+                def httpStatus = CREATED
+                break
+            case 'update':
+                strview = 'edit'
+                strcode = 'default.updated.message'
+                def httpStatus = OK
+                break
+            case 'delete':
+                strcode = 'default.deleted.message'
+                def httpStatus = NO_CONTENT
+                break
+        }
+
+        if (inUser == null) {
             notFound()
             return
         }
 
-        if (userInstance.hasErrors()) {
-            respond userInstance.errors, view:'create'
-            return
+        if (inAction != 'delete') {
+            if ( userService.registerUser(inUser)!=0 ) {
+                respond inUser.errors, view:strview
+            }
         }
-
-        userInstance.save flush:true
+        else
+        {
+            userService.deleteUser(inUser)
+        }
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-                redirect userInstance
+                flash.message = message(code: strcode, args: [message(code: 'user.label', default: 'User'), inUser.id])
+
+                if (inAction != 'delete')
+                    redirect inUser
+                else
+                    redirect action:"index", method:"GET"
             }
-            '*' { respond userInstance, [status: CREATED] }
-        }
-    }
-
-    def edit(User userInstance) {
-        respond userInstance
-    }
-
-    @Transactional
-    def update(User userInstance) {
-        if (userInstance == null) {
-            notFound()
-            return
+            '*' { respond inUser, [status: httpStatus] }
         }
 
-        if (userInstance.hasErrors()) {
-            respond userInstance.errors, view:'edit'
-            return
-        }
 
-        userInstance.save flush:true
-
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-                redirect userInstance
-            }
-            '*'{ respond userInstance, [status: OK] }
-        }
-    }
-
-    @Transactional
-    def delete(User userInstance) {
-
-        if (userInstance == null) {
-            notFound()
-            return
-        }
-
-        userInstance.delete flush:true
-
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
     }
 
     protected void notFound() {

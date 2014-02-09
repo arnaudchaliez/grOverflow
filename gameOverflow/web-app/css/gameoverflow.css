@@ -266,6 +266,10 @@ a:hover {
     color: #ffffff !important;
 }
 
+.nav-tabs > li a{
+    color: #000000 !important;
+}
+
 .tab-content > .active {
     display: block;
     background-color: #444444;
@@ -460,8 +464,15 @@ a:hover {
     }
 }
 
-#badge-shop-thumbnail.thumbnail {
+#badge-shop-content li {
     width: 250px;
+    display: inline-block;
+    margin: 5px;
+}
+
+#badge-shop-content .buttons {
+    position: relative;
+    right: 0px;
 }
 
 .coins {
