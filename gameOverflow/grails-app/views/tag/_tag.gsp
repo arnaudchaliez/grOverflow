@@ -1,5 +1,5 @@
-<g:link controller="tag" action="show" id="${tag.name}">
+<g:link controller="tag" action="show" id="${tag?.name}">
     <span class="tag">
-        ${tag.name}
+        ${tag?.name}
     </span>
 </g:link>
