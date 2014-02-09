@@ -20,6 +20,5 @@ class Tag {
     }
     static mapping = {
         sort name: "asc"
-        questions sort: "date", order: "desc"
     }
 }
