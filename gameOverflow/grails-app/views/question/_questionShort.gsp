@@ -23,17 +23,19 @@
             </span>
         </div>
     </td>
-    <div class="question-right">
-        <td>
-            <span class="number">
-                <strong>${question?.votes?.size()}</strong>
-                <g:message code="score.label" default="Score" />
-            </span>
-        </td>
-        <td>
-            <g:render template="/user/userThumbnailMini" collection="${question?.author}" />
-            <!-- <g:formatDate date="${question?.date}" />-->
-        </td>
-    </div>
+    <td>
+        <div class="question-right">
+            <td>
+                <span class="number">
+                    <strong>${question?.votes?.size()}</strong>
+                    <g:message code="score.label" default="Score" />
+                </span>
+            </td>
+            <td>
+                <g:render template="/user/userThumbnailMini" collection="${question?.author}" />
+                <!-- <g:formatDate date="${question?.date}" />-->
+            </td>
+        </div>
+    </td>
 
 

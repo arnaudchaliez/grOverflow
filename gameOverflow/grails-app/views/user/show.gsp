@@ -1,16 +1,14 @@
 
-<%@ page import="gameoverflow.User" %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta name="layout" content="main">
-		<title><g:message code="user.profil.title" args="[userInstance?.username]" /></title>
-	</head>
-	<body>
+<g:applyLayout name="page">
+    <head>
+        <title><g:message code="user.profil.title" args="[userInstance?.username]" /></title>
+    </head>
+
+    <content tag="gocontent">
         <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
         </g:if>
-		<div id="show-user" role="main">
+        <div id="show-user" role="main">
             <div class="boxed">
                 <div id="show-user-title">
                     <div class="shadow"></div>
@@ -68,7 +66,7 @@
                         </ol>
 
                     </div>
-                   &nbsp;
+                    &nbsp;
                 </div>
             </div>
 
@@ -129,5 +127,5 @@
             </div>
 
         </div>
-	</body>
-</html>
+    </content>
+</g:applyLayout>

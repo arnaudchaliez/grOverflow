@@ -1,22 +1,20 @@
 <%@ page import="gameoverflow.Vote; gameoverflow.Question" %>
 <%@ page import="gameoverflow.Answer" %>
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
+<g:applyLayout name="page">
+    <head>
+        <g:set var="entityName" value="${message(code: 'question.label', default: 'Question')}" />
 
         <title>${question?.title}</title>
 
         <r:require modules="bootstrapInput"/>
         <ckeditor:resources />
-	</head>
-	<body>
-        <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-        </g:if>
-		<div id="show-question" role="main">
+    </head>
+
+    <content tag="gocontent"><g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
+        <div id="show-question" role="main">
             <div class="boxed">
                 <div id="show-question-title">
                     <div class="shadow"></div>
@@ -32,21 +30,21 @@
                     </div>
                 </div>
                 <div id="show-question-content">
-                        <div class="col-sm-9 well">
-                            <!-- TODO SECURITY !! , sanitizer ?  -->
-                            ${raw(question?.content)}
-                        </div>
+                    <div class="col-sm-9 well">
+                        <!-- TODO SECURITY !! , sanitizer ?  -->
+                        ${raw(question?.content)}
+                    </div>
 
-                        <div class="col-sm-3">
-                            <g:render template="/user/userThumbnail" collection="${question?.author}" />
-                        </div>
+                    <div class="col-sm-3">
+                        <g:render template="/user/userThumbnail" collection="${question?.author}" />
+                    </div>
 
-                        <g:form url="[resource:question, action:'delete']" method="DELETE">
-                            <fieldset class="buttons">
-                                <g:link class="edit" action="edit" resource="${question}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                                <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                            </fieldset>
-                        </g:form>
+                    <g:form url="[resource:question, action:'delete']" method="DELETE">
+                        <fieldset class="buttons">
+                            <g:link class="edit" action="edit" resource="${question}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                            <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                        </fieldset>
+                    </g:form>
 
                     <g:voteForm idMessage="${question.id}" type="question">
                         ${question?.score}
@@ -62,27 +60,27 @@
                     </div>
                 </div>
                 <div id="answers-list">
-                        <ol>
-                            <g:each in="${answers}" status="i" var="currentAnswer">
+                    <ol>
+                        <g:each in="${answers}" status="i" var="currentAnswer">
 
-                                <g:render template="/answer/answerBloc" collection="${currentAnswer}" var="answer" />
+                            <g:render template="/answer/answerBloc" collection="${currentAnswer}" var="answer" />
 
-                                <div class="hidden" id="show-question-commentform-${currentAnswer.id}">
-                                    <g:form url="[resource: comment, controller:'comment', action:'save']" >
-                                        <fieldset class="form">
-                                            <g:render template="/comment/form" />
-                                        </fieldset>
+                            <div class="hidden" id="show-question-commentform-${currentAnswer.id}">
+                                <g:form url="[resource: comment, controller:'comment', action:'save']" >
+                                    <fieldset class="form">
+                                        <g:render template="/comment/form" />
+                                    </fieldset>
 
-                                        <g:hiddenField name="messageId" value="${currentAnswer.id}" />
-                                        <g:hiddenField name="questionId" value="${question.id}" />
-                                    </g:form>
-                                </div>
+                                    <g:hiddenField name="messageId" value="${currentAnswer.id}" />
+                                    <g:hiddenField name="questionId" value="${question.id}" />
+                                </g:form>
+                            </div>
 
-                                <g:each in="${currentAnswer.comments}"  var="currentComment">
-                                    <g:render template="/comment/commentBloc" collection="${currentComment}" var="comment" />
-                                </g:each>
+                            <g:each in="${currentAnswer.comments}"  var="currentComment">
+                                <g:render template="/comment/commentBloc" collection="${currentComment}" var="comment" />
                             </g:each>
-                        </ol>
+                        </g:each>
+                    </ol>
                 </div>
                 <div>
                     <div><g:message code="answer.label" /> :</div>
@@ -100,7 +98,7 @@
                 </div>
 
             </div>
-		</div>
-	</body>
-</html>
+        </div>
+    </content>
+</g:applyLayout>
 

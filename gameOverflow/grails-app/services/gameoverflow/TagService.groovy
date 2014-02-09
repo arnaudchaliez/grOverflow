@@ -43,6 +43,10 @@ class TagService {
         return tag
     }
 
+    def getTagQuestions(Tag inTag) {
+        return inTag.questions.sort {it.title}
+    }
+
     /**
      * return the recent tags.
      * @param number limit the tags returned

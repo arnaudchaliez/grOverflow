@@ -132,6 +132,37 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/**':                            ['ROLE_ADMIN']
 ]
 
+// ckeditor configuration
+ckeditor {
+    config = "/js/ckeditor.config.js"
+    skipAllowedItemsCheck = false
+    defaultFileBrowser = "ofm"
+    upload {
+        basedir = "/uploads/"
+        overwrite = false
+        link {
+            browser = false
+            upload = false
+            allowed = []
+            denied = ['html', 'htm', 'php', 'php2', 'php3', 'php4', 'php5',
+                    'phtml', 'pwml', 'inc', 'asp', 'aspx', 'ascx', 'jsp',
+                    'cfm', 'cfc', 'pl', 'bat', 'exe', 'com', 'dll', 'vbs', 'js', 'reg',
+                    'cgi', 'htaccess', 'asis', 'sh', 'shtml', 'shtm', 'phtm']
+        }
+        image {
+            browser = false
+            upload = false
+            allowed = ['jpg', 'gif', 'jpeg', 'png']
+            denied = []
+        }
+        flash {
+            browser = false
+            upload = false
+            allowed = ['swf']
+            denied = []
+        }
+    }
+}
 
 //application configuration
 
