@@ -21,7 +21,7 @@
 
                     <g:sortableColumn property="dateRegistration" title="${message(code: 'user.dateRegistration.label', default: 'Date Inscription')}" />
 
-                    <g:sortableColumn property="score" title="${message(code: 'user.score.label', default: 'Score')}" />
+                    <g:sortableColumn property="score" title="${message(code: 'score.label', default: 'Score')}" />
 
                 </tr>
                 </thead>

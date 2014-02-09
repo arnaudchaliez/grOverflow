@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <g:set var="password_label" value="${message(code: 'user.password.label', default: 'Password')}" />
-                <g:textField type="password" class="form-control" name="j_password" id="password" placeholder="${password_label}" />
+                <g:passwordField type="password" class="form-control" name="j_password" id="password" placeholder="${password_label}" />
             </div>
             <div class="row">
                 <label class="control-label" for='remember_me'><g:message code="login.remember.me.label"/></label>

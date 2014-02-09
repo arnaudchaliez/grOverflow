@@ -50,7 +50,6 @@
 
                 </div>
                 <div class="tab-pane" id="unanswered">
-                </table>
                     <table>
                         <thead>
                         <tr>
@@ -79,7 +78,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </content>
 </g:applyLayout>

@@ -21,5 +21,7 @@ class Badge {
     static constraints = {
         name(blank: false)
         description(blank: false)
+        picture(blank: true)
+        description(nullable: true)
     }
 }

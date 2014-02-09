@@ -30,6 +30,16 @@
     </div>
 </div>
 
+<div class="form-group fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
+    <label for="password" class="col-md-3 control-label">
+        <g:message code="user.password.label" />
+        <span class="required-indicator">*</span>
+    </label>
+    <div class="col-md-9">
+        <g:passwordField  class="form-control" name="password" required="" value="${userInstance?.password}"/>
+    </div>
+</div>
+
 <div class="form-group fieldcontain ${hasErrors(bean: userInstance, field: 'mail', 'error')} required">
     <label for="mail" class="col-md-3 control-label">
         <g:message code="user.mail.label" />
@@ -55,7 +65,7 @@
         <g:message code="user.bio.label" />
     </label>
     <div class="col-md-9">
-        <g:textArea class="form-control" name="bio" value="${userInstance?.bio}"/>
+        <g:textArea class="form-control" name="bio" value="${userInstance?.bio}" />
     </div>
 </div>
 

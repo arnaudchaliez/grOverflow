@@ -14,10 +14,10 @@ class User {
     Date dateRegistration
 
     /** complementar informations */
-    String bio = ""
-    String website = ""
-    String country = ""
-    String city = ""
+    String bio
+    String website
+    String country
+    String city
     Date birthday
 
     int score = 0
@@ -39,6 +39,11 @@ class User {
         password (blank: false)
         birthday(blank: false)
         dateRegistration(blank: false)
+        country(nullable: true)
+        website(nullable: true)
+        bio(nullable: true)
+        city(nullable: true)
+
     }
 
     //increase performances, see spring documentation

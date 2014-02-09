@@ -131,8 +131,8 @@ class QuestionService {
         messageService.checkInsertMessage(inQuestion)
 
         if (inQuestion.hasErrors()) {
-            Log.error('error creating question, question still have errors :')
-            Log.error(inQuestion)
+            log.error('error creating question, question still have errors :')
+            log.error(inQuestion)
             return -1
         } else {
             inQuestion.save(failOnError: true)
