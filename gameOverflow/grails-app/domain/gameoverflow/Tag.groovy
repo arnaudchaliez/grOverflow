@@ -16,5 +16,10 @@ class Tag {
 
     static constraints = {
         description(length: 0..800, nullable: true)
+        name(blank: false)
+    }
+    static mapping = {
+        sort name: "asc"
+        questions sort: "date", order: "desc"
     }
 }

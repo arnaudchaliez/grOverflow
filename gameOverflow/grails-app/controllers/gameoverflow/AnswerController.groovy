@@ -115,7 +115,6 @@ class AnswerController {
             }
             '*' { respond inAnswer, [status: httpStatus] }
         }
-
     }
 
 

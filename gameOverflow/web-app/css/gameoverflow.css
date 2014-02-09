@@ -507,18 +507,24 @@ a:hover {
     padding-left: 80px;
     position: relative;
 }
-.comment-body {
-    padding: 23px 20px;
+.message-body {
     border-radius: 5px;
     -webkit-box-shadow: 0 2px 1px rgba(224, 222, 220, 0.75);
     box-shadow: 0 2px 1px rgba(224, 222, 220, 0.75);
     position: relative;
-    margin-bottom: 18px;
     border: 1px solid #dfdcd6;
     background: #fbfbfb;
 }
-.comment-body:before,
-.comment-body:after {
+.comment-body {
+    margin-top: 5px;
+    padding: 5px 5px;
+}
+.answer-body {
+    padding: 23px 20px;
+    margin-top: 15px;
+}
+.message-body:before,
+.message-body:after {
     content: '';
     width: 0;
     height: 0;
@@ -529,7 +535,7 @@ a:hover {
     border-bottom: 6px solid transparent;
     border-right: 7px solid #dfdcd6;
 }
-.comment-body:after {left: -6px; border-right-color: #fbfbfb;}
+.message-body:after {left: -6px; border-right-color: #fbfbfb;}
 
 .comment-avatar {
     position: absolute;
@@ -557,8 +563,8 @@ a:hover {
     left: inherit;
 }
 
-.comment-right .comment-body:before,
-.comment-right .comment-body:after {
+.comment-right .message-body:before,
+.comment-right .message-body:after {
     content: '';
     width: 0;
     height: 0;
@@ -572,13 +578,14 @@ a:hover {
     border-right: 0px;
 }
 
-.comment-right .comment-body:after {
+.comment-right .message-body:after {
     left: inherit;
     right: -6px;
     border-left-color: #fbfbfb;
 }
 
 .comment-author {margin-bottom: 11px; color: #91bb25;}
+.comment-body .comment-author { margin-bottom: 0px; }
 .comment-author .link-author {float: left; font-size: 18px; color: #3e362b;}
 .comment-author .comment-meta {float: right; font-size: 12px; color: #a4a4a4; text-align: right; margin-top: 4px;}
 .comment-author .comment-meta .link-reply {color: #a4a4a4;}
@@ -587,6 +594,9 @@ a:hover {
 .comment-footer {
     font-size: 10px;
     float: right;
+}
+.comment-footer div {
+    cursor: pointer;
 }
 @media (max-width: 479px) {
     .comment-list .children li.comment {margin-left: -80px;}
@@ -603,7 +613,7 @@ a:hover {
         text-align: left;
         display: block;
     }
-    .comment-body {padding: 10px;}
+    .message-body {padding: 10px;}
 }
 
 
@@ -701,5 +711,81 @@ a:hover {
 }
 .badge.style2.badge-orange{background-position:-100px -167px;}
 .badge.style2.badge-purple{background-position:-200px -167px;}
+
+/*-----------------------------------*/
+/* Messages arrows */
+/*-----------------------------------*/
+.message-content {
+    float: left;
+}
+.message_vote {
+    text-align: center;
+    font-family: "fipps",Verdana,Tahoma;
+    color: #aaa;
+    float: left;
+}
+.message_vote .score {
+    display: block;
+    margin: 3px 0px;
+}
+.message_vote .arrow {
+    display: block;
+}
+.message_vote_answer, .message_vote_question {
+    width: 30px;
+    font-size: 20px;
+    margin: 5px 15px 10px 0px;
+}
+.message_vote_answer .arrow, .message_vote_question .arrow {
+    width: 30px;
+    height: 17px;
+}
+.message_vote_answer .arrow-up, .message_vote_question .arrow-up {
+    background-image: url('/images/arrows/arrow_up_m.png');
+}
+.message_vote_answer .vote-UP .arrow-up, .message_vote_question .vote-UP .arrow-up {
+    background-image: url('/images/arrows/arrow_up_vote_m.png');
+}
+.message_vote_answer .arrow-down, .message_vote_question .arrow-down {
+    background-image: url('/images/arrows/arrow_down_m.png');
+}
+.message_vote_answer .vote-DOWN .arrow-down, .message_vote_question .vote-DOWN .arrow-down {
+    background-image: url('/images/arrows/arrow_down_vote_m.png');
+}
+.message_vote_comment {
+    width: 15px;
+    font-size: 12px;
+    margin: 5px 10px 5px 5px;
+}
+.message_vote_comment .arrow {
+    width: 15px;
+    height: 8px;
+}
+.message_vote_comment .arrow-up {
+    background-image: url('/images/arrows/arrow_up_s.png');
+}
+.message_vote_comment .vote-UP .arrow-up {
+    background-image: url('/images/arrows/arrow_up_vote_s.png');
+}
+.message_vote_comment .arrow-down {
+    background-image: url('/images/arrows/arrow_down_s.png');
+}
+.message_vote_comment .vote-DOWN .arrow-down {
+    background-image: url('/images/arrows/arrow_down_vote_s.png');
+}
+.best_answer {
+    float: left;
+}
+.best_answer, .best_answer div, .best_answer a {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+.best_answer .best-true {
+    background-image: url('/images/ok.png');
+}
+.best_answer .best-false {
+    background-image: url('/images/ko.png');
+}
 
 /*-----------------------------------*/

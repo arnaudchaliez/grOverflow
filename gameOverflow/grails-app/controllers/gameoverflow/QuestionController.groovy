@@ -29,7 +29,7 @@ class QuestionController {
         questionService.viewQuestion(inQuestion)
         def canVote = voteService.canUserConnectedVote(inQuestion.id)
 
-        [tags: questionService.listTags(inQuestion), answers: questionService.listAnswers(inQuestion), question: inQuestion]
+        [tags: questionService.listTags(inQuestion), bestAnswer: inQuestion.answers.find({it.bestAnswer}), simpleAnswers: inQuestion.answers.findAll({!it.bestAnswer}), question: inQuestion]
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
@@ -40,6 +40,14 @@ class QuestionController {
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     def create() {
         respond new Question(params)
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
+    @Transactional
+    def bestAnswer(Answer inAnswer) {
+        Question question = Question.get(params.idQuestion);
+        questionService.bestAnswer(inAnswer, question)
+        redirect(controller:'question', action:'show', id: question.id)
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
@@ -77,7 +85,6 @@ class QuestionController {
 
     protected void processAction(Question inQuestion, String inAction)
     {
-
         //message code associated with the action
         String strcode = ''
         //view associated with the action

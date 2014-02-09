@@ -8,4 +8,8 @@ class Comment extends Message {
 
     static constraints = {
     }
+
+    static mapping = {
+        sort date: "asc"
+    }
 }
