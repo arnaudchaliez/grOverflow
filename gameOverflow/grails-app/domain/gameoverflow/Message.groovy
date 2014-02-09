@@ -12,6 +12,9 @@ abstract class Message {
     Boolean commentAuthorize = false
 
     static hasMany = [votes: Vote, comments: Comment]
+    static mapping = {
+        comments sort: 'date', order: 'desc'
+    }
 
     static belongsTo = [author: User]
 

@@ -37,6 +37,24 @@ class VoteService {
         inVote.delete()
     }
 
+    def updateVote(Vote inVote, Vote.Type inVoteType) {
+        if(inVote.type == inVoteType)
+            deleteVote(inVote)
+        else
+        {
+            if( inVoteType == Vote.Type.UP )
+                inVote.message.score+=2
+            else if( inVoteType == Vote.Type.DOWN )
+                inVote.message.score-=2
+
+            inVote.type = inVoteType
+            inVote.date = new Date()
+
+            inVote.message.validate()
+            inVote.validate()
+        }
+    }
+
     /**
      * Method that permits to add a vote to a message associated to the connected user.
      * @param inMessageId id of the message to add the vote.
@@ -50,10 +68,8 @@ class VoteService {
         if(user && message) {
             Vote vote = Vote.findByAuthorAndMessage(user, message)
             if( vote != null ) {
-                println("Vote already exist, remove it")
-                deleteVote(vote)
+                updateVote(vote, inVoteType)
             } else {
-                println("Create the vote")
                 vote =  new Vote(
                         date: new Date(),
                         author: user,

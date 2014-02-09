@@ -30,9 +30,6 @@ class CommentController {
         Message message = messageService.getMessage(Integer.parseInt(params.messageId))
         Question question = questionService.getQuestion(Integer.parseInt(params.questionId))
 
-        println(message)
-        println(question)
-
         processAction(inComment, 'insert', question,  message)
     }
 
@@ -66,7 +63,6 @@ class CommentController {
 
     protected void processAction(Comment inComment, String inAction, Question inQuestion, Message inMessage = null)
     {
-
         //message code associated with the action
         String strcode = ''
         //view associated with the action

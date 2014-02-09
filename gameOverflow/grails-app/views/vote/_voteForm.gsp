@@ -1,4 +1,4 @@
-<div class="message_vote">
+<div class="message_vote message_vote_${typeMessage}">
     <div class="vote-${voted}">
         <g:link controller="message" action="vote" id="${idMessage}" params='[typeVote: "${ types.UP }", typeMessage: "${typeMessage}", idQuestion: "${idQuestion}" ]'>
             <span class="show-question-up arrow-up arrow"></span>
