@@ -7,6 +7,8 @@ abstract class Message {
     String content
     Date date
 
+    int score = 0
+
     Boolean commentAuthorize = false
 
     static hasMany = [votes: Vote, comments: Comment]

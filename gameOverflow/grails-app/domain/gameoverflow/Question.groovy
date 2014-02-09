@@ -5,8 +5,6 @@ class Question extends Message {
     int views
     String title
 
-    int score = 0
-
     static hasMany = [answers: Answer, tags: Tag]
     static searchable = true
 

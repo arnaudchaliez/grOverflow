@@ -692,3 +692,33 @@ a:hover {
 .badge.style2.badge-purple{background-position:-200px -167px;}
 
 /*-----------------------------------*/
+/* Messages arrows */
+/*-----------------------------------*/
+.message_vote {
+    text-align: center;
+    width: 30px;
+    font-family: "fipps",Verdana,Tahoma;
+    font-size: 20px;
+    color: #aaa;
+    float: left;
+    margin-right: 10px;
+}
+.message_vote .arrow {
+    width: 30px;
+    height: 17px;
+    display: block;
+}
+.message_vote .arrow-up {
+    background-image: url('/images/arrows/arrow_up_m.png');
+}
+.message_vote .vote-UP .arrow-up {
+    background-image: url('/images/arrows/arrow_up_vote_m.png');
+}
+.message_vote .arrow-down {
+    background-image: url('/images/arrows/arrow_down_m.png');
+}
+.message_vote .vote-DOWN .arrow-down {
+    background-image: url('/images/arrows/arrow_down_vote_m.png');
+}
+
+/*-----------------------------------*/

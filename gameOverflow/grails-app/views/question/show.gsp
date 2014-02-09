@@ -30,30 +30,31 @@
                     </div>
                 </div>
                 <div id="show-question-content">
-                    <div style="position:relative">
-                        <div style="clear: both;"></div>
-                        <div class="col-sm-9 well">
-                            <!-- TODO SECURITY !! , sanitizer ?  -->
-                            ${raw(question?.content)}
+                    <div style="position:relative" class="clearfix">
+                        <div style="clear:both"></div>
+                        <div class="col-xs-9">
+                            <g:voteForm idMessage="${question.id}" idQuestion="${question.id}" typeMessage="question">
+                                ${question?.score}
+                            </g:voteForm>
+                            <div class="well col-xs-offset-1">
+                                <!-- TODO SECURITY !! , sanitizer ?  -->
+                                ${raw(question?.content)}
+                            </div>
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-xs-3">
                             <g:render template="/user/userThumbnail" collection="${question?.author}" />
                         </div>
                     </div>
                     <div class="actions">
                         <g:form url="[resource:question, action:'delete']" method="DELETE" class="form-inline">
-                                <g:set var="editLabel" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
-                                <g:link class="edit" action="edit" resource="${question}">
-                                    <input type="button" class="btn btn-default" value="${editLabel}" />
-                                </g:link>
-                                <g:actionSubmit class="delete btn btn-default" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                            <g:set var="editLabel" value="${message(code: 'default.button.edit.label', default: 'Edit')}" />
+                            <g:link class="edit" action="edit" resource="${question}">
+                                <input type="button" class="btn btn-default" value="${editLabel}" />
+                            </g:link>
+                            <g:actionSubmit class="delete btn btn-default" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                         </g:form>
                     </div>
-
-                    <g:voteForm idMessage="${question.id}" type="question">
-                        ${question?.score}
-                    </g:voteForm>
 
                 </div>
             </div>

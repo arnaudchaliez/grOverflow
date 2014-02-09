@@ -8,28 +8,59 @@ class VoteService {
 
     def userService
 
+    def insertVote(Vote inVote) {
+        if( inVote.type == Vote.Type.DOWN )
+            inVote.message.score--
+        else if( inVote.type == Vote.Type.UP )
+            inVote.message.score++
+
+        inVote.validate()
+
+        inVote.message.validate()
+        if ( !inVote.hasErrors() ) {
+            inVote.save(failOnError: true)
+        } else {
+            println("Fail when creating new vote")
+            inVote.errors.allErrors.each {
+                println it
+            }
+        }
+    }
+
+    def deleteVote(Vote inVote) {
+        if( inVote.type == Vote.Type.DOWN )
+            inVote.message.score++
+        else if( inVote.type == Vote.Type.UP )
+            inVote.message.score--
+
+        inVote.message.validate()
+        inVote.delete()
+    }
+
     /**
      * Method that permits to add a vote to a message associated to the connected user.
      * @param inMessageId id of the message to add the vote.
      * @param inType type of the vote (UP, DOWN or VALIDATE)
      */
-    def createVote(int inMessageId, String inType) {
-        log.info('service vote, createVote called with the question : ' + inMessageId + 'and type :' + inType)
+    def createVote(int inMessageId, Vote.Type inVoteType) {
+        log.info('service vote, createVote called with the question : ' + inMessageId + 'and type :' + inVoteType)
 
         User user = userService.getUserConnected()
-        if (user) {
-            Vote vote =  new Vote(
-                    date: new Date(),
-                    author:user,
-                    type: inType,
-                    message: Message.get(inMessageId)
-            )
-            vote.validate()
-            if ( !vote.hasErrors() ) {
-                vote.save(failOnError: true)
-            }
-            else {
-                log.error('trying to create vote with errors')
+        Message message = Message.get(inMessageId)
+        if(user && message) {
+            Vote vote = Vote.findByAuthorAndMessage(user, message)
+            if( vote != null ) {
+                println("Vote already exist, remove it")
+                deleteVote(vote)
+            } else {
+                println("Create the vote")
+                vote =  new Vote(
+                        date: new Date(),
+                        author: user,
+                        type: inVoteType,
+                        message: message
+                )
+                insertVote(vote)
             }
         }
     }
@@ -56,7 +87,6 @@ class VoteService {
                 def votesMessageTypes = EnumSet.noneOf(Vote.Type)
                 votes.each() {
                     votesMessageTypes.add(it.type)
-                    println('raaa ' + it.type)
                 }
                 voteTypes = EnumSet.complementOf(votesMessageTypes)
 
