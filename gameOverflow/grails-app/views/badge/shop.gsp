@@ -13,12 +13,22 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <div id="badge-shop-list">
-        <g:each in="${badges}" status="i" var="currentBadge">
-            <div>
-                ${currentBadge}
+        <div id="badge-shop-list" class="panel panel-default">
+            <div id="badge-shop-title" class="panel-heading">
+                <g:message code="shop.label" />
             </div>
-        </g:each>
+
+            <div id="badge-shop-content">
+                <ul>
+                    <g:each in="${badges}" status="i" var="currentBadge">
+                        <li>
+                            <g:render template="badgeShop" collection="${currentBadge}" var="badge" />
+                        </li>
+                    </g:each>
+                </ul>
+            </div>
+
+
     </div>
 </div>
 </body>
