@@ -10,7 +10,13 @@ class TagController {
     def questionService
     def userService
 
-    def index() {}
+    @Secured('permitAll')
+    def index() {
+        int max = grailsApplication.config.gameoverflow.tag.popularMax
+        def tagsList = tagService.listPopularTags(max)
+
+        [tagsList: tagsList, maxTags:max]
+    }
 
     @Secured('permitAll')
     def popularTags() {

@@ -257,6 +257,10 @@ a:hover {
     style: none;
 }
 
+#index-questions .nav-tabs {
+    color: #000000 !important;
+}
+
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     background-color: #444444 !important;
     color: #ffffff !important;

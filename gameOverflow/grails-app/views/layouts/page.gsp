@@ -14,18 +14,23 @@
                 </g:link>
             </div>
             <div class="col-xs-2">
+                <g:link controller="question" action="create">
+                    <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="question.new" default="New question" /></button>
+                </g:link>
+            </div>
+            <div class="col-xs-2">
+                <g:link controller="tag">
+                    <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="tag.title" default="Popular tags" /></button>
+                </g:link>
+            </div>
+            <div class="col-xs-2">
                 <sec:ifLoggedIn>
                     <g:link controller="user" action="show" id="${sec.loggedInUserInfo(field: 'id')}">
                         <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="profil.label" default="Profil" /></button>
                     </g:link>
                 </sec:ifLoggedIn>
             </div>
-            <div class="col-xs-2 col-md-offset-2">
-                <g:link controller="question" action="create">
-                    <button type="button" class="btn btn-primary btn-lg btn-block"><g:message code="question.new" default="New question" /></button>
-                </g:link>
-            </div>
-            <div class="col-xs-4">
+            <div class="col-xs-offset-4">
                 <div class="pull-right" id="gameOverFlowLogo" role="banner">
                     <a href="/gameOverflow"><img src="${resource(dir: 'images', file: 'logo_gameoverflow.png')}" alt="GameOverFlow"/></a>
                 </div>
