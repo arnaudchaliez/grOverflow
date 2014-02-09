@@ -145,7 +145,9 @@ class QuestionService {
             if( inAnswer.bestAnswer == true )
             {
                 inAnswer.bestAnswer = false
-                inAnswer.validate()
+                inAnswer.author.score -= 20
+                inAnswer.author.save()
+                inAnswer.save()
             }
             else
             {
@@ -154,11 +156,15 @@ class QuestionService {
                 if(currentBestAnswer)
                 {
                     currentBestAnswer.bestAnswer = false;
-                    currentBestAnswer.validate()
+                    currentBestAnswer.author.score -= 20
+                    currentBestAnswer.author.save()
+                    currentBestAnswer.save()
                 }
 
                 inAnswer.bestAnswer = true
-                inAnswer.validate()
+                inAnswer.author.score += 20
+                inAnswer.author.save()
+                inAnswer.save()
             }
         }
     }

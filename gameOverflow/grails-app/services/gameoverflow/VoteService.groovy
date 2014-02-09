@@ -10,13 +10,20 @@ class VoteService {
 
     def insertVote(Vote inVote) {
         if( inVote.type == Vote.Type.DOWN )
+        {
             inVote.message.score--
+            inVote.message.author.score-=5
+        }
         else if( inVote.type == Vote.Type.UP )
+        {
             inVote.message.score++
+            inVote.message.author.score+=5
+        }
 
-        inVote.validate()
+        inVote.message.author.save()
+        inVote.message.save()
+        inVote.save()
 
-        inVote.message.validate()
         if ( !inVote.hasErrors() ) {
             inVote.save(failOnError: true)
         } else {
@@ -29,12 +36,19 @@ class VoteService {
 
     def deleteVote(Vote inVote) {
         if( inVote.type == Vote.Type.DOWN )
+        {
             inVote.message.score++
+            inVote.message.author.score+=5
+        }
         else if( inVote.type == Vote.Type.UP )
+        {
             inVote.message.score--
+            inVote.message.author.score-=5
+        }
 
-        inVote.message.validate()
-        inVote.delete()
+        inVote.message.author.save()
+        inVote.message.save()
+        inVote.save()
     }
 
     def updateVote(Vote inVote, Vote.Type inVoteType) {
@@ -43,15 +57,22 @@ class VoteService {
         else
         {
             if( inVoteType == Vote.Type.UP )
+            {
                 inVote.message.score+=2
+                inVote.message.author.score+=10
+            }
             else if( inVoteType == Vote.Type.DOWN )
+            {
                 inVote.message.score-=2
+                inVote.message.author.score-=10
+            }
 
             inVote.type = inVoteType
             inVote.date = new Date()
 
-            inVote.message.validate()
-            inVote.validate()
+            inVote.message.author.save()
+            inVote.message.save()
+            inVote.save()
         }
     }
 

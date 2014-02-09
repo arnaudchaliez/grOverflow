@@ -18,7 +18,7 @@ class VoteTagLib {
             out << render(template:"/vote/voteForm", model:[score: body(), idQuestion: attrs.idQuestion, idMessage: attrs.idMessage, types: Vote.Type, typeMessage: attrs.typeMessage, voted: voted] )
         }
         else {
-            log.error('taglig vote walled without idMessage')
+            log.error('TagLig vote walled without idMessage')
         }
     }
 }

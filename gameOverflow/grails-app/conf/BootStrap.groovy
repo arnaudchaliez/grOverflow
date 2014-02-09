@@ -19,7 +19,7 @@ class BootStrap {
         userAdmin.save(failOnError:true)
         def userKinoko = new User(username: 'Kinoko', dateRegistration: new Date(), birthday: new Date(), bio: ':)', password: 'kinoko', lastname: 'Chaliez', firstname: 'Arnaud', mail: 'arnaudchlzd@gmail.com', enabled: true)
         userKinoko.save(failOnError:true)
-        def userBondika = new User(username: 'Bondika', dateRegistration: new Date(), birthday: new Date(), password: 'bondika', lastname: 'Bouny', firstname: 'Jérémy', mail: 'bondika@truc.com', enabled: true)
+        def userBondika = new User(username: 'Bondika', dateRegistration: new Date(), birthday: new Date(), password: 'bondika', lastname: 'Bouny', firstname: 'Jérémy', mail: 'jbouny@gmail.com', enabled: true)
         userBondika.save(failOnError:true)
 
         UserRole.create(userAdmin, roleAdmin)
