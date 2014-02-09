@@ -1,7 +1,5 @@
 package gameoverflow
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import gameoverflow.User
 abstract class Message {
 
     String content
@@ -12,9 +10,6 @@ abstract class Message {
     Boolean commentAuthorize = false
 
     static hasMany = [votes: Vote, comments: Comment]
-    static mapping = {
-        comments sort: 'date', order: 'desc'
-    }
 
     static belongsTo = [author: User]
 
@@ -22,6 +17,10 @@ abstract class Message {
         content(blank: false, length: 2..2000)
         author(blank: false)
         date(blank: false)
+    }
+
+    static mapping = {
+        comments sort: "date", order: "asc"
     }
 
 }

@@ -1,9 +1,7 @@
 package gameoverflow
 
-import gameoverflow.Question
 import grails.transaction.Transactional
 import jline.internal.Log
-import org.springframework.security.core.context.SecurityContextHolder
 
 @Transactional
 class QuestionService {
@@ -139,6 +137,30 @@ class QuestionService {
         }
 
         return 0
+    }
+
+    def bestAnswer(Answer inAnswer, Question inQuestion) {
+        if( inQuestion.answers.contains(inAnswer) )
+        {
+            if( inAnswer.bestAnswer == true )
+            {
+                inAnswer.bestAnswer = false
+                inAnswer.validate()
+            }
+            else
+            {
+                Answer currentBestAnswer = inQuestion.answers.find( { it.bestAnswer == true} );
+
+                if(currentBestAnswer)
+                {
+                    currentBestAnswer.bestAnswer = false;
+                    currentBestAnswer.validate()
+                }
+
+                inAnswer.bestAnswer = true
+                inAnswer.validate()
+            }
+        }
     }
 
 }

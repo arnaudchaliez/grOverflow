@@ -6,4 +6,10 @@ class Answer extends Message {
 
     static constraints = {
     }
+
+    boolean bestAnswer = false
+
+    static mapping = {
+        sort score: "desc"
+    }
 }

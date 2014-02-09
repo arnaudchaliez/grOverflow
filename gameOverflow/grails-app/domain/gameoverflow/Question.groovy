@@ -12,4 +12,9 @@ class Question extends Message {
         title(title: false)
         views(defaultValue: "0")
     }
+
+    static mapping = {
+        sort date: "desc"
+        answers sort: "score", order: "desc"
+    }
 }

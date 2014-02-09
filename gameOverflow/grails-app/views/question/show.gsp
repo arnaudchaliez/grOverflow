@@ -91,26 +91,17 @@
                     </div>
                 </div>
                 <!-- ANSWERS -->
+                <g:set var="canSelectBest" value="${false}" />
+                <sec:ifLoggedIn>
+                    <g:set var="canSelectBest" value="${sec.loggedInUserInfo(field: 'id').toInteger() == question.author.id}" />
+                </sec:ifLoggedIn>
                 <div id="answers-list">
                     <ol>
-                        <g:each in="${answers}" status="i" var="currentAnswer">
-
+                        <g:if test="${bestAnswer != null}">
+                            <g:render template="/answer/answerBloc" collection="${bestAnswer}" var="answer" />
+                        </g:if>
+                        <g:each in="${simpleAnswers}" status="i" var="currentAnswer">
                             <g:render template="/answer/answerBloc" collection="${currentAnswer}" var="answer" />
-
-                            <div class="hidden" id="show-question-commentform-${currentAnswer.id}">
-                                <g:form role="form" url="[controller:'comment', action:'save']" >
-                                    <div class="form-group">
-                                        <g:render class="form-control" template="/comment/form" />
-                                    </div>
-
-                                    <g:hiddenField name="messageId" value="${currentAnswer.id}" />
-                                    <g:hiddenField name="questionId" value="${question.id}" />
-                                </g:form>
-                            </div>
-
-                            <g:each in="${currentAnswer.comments}"  var="currentComment">
-                                <g:render template="/comment/commentBloc" collection="${currentComment}" var="comment" />
-                            </g:each>
                         </g:each>
                     </ol>
                 </div>
@@ -129,7 +120,6 @@
                         <g:hiddenField name="questionId" value="${question.id}" />
                     </g:form>
                 </div>
-
             </div>
         </div>
 

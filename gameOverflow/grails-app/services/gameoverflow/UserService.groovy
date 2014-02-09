@@ -1,9 +1,6 @@
 package gameoverflow
 
 import grails.transaction.Transactional
-import org.springframework.security.core.context.SecurityContextHolder
-import security.Role
-import security.UserRole
 
 @Transactional
 class UserService {

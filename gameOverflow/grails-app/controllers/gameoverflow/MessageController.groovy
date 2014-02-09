@@ -13,7 +13,6 @@ class MessageController {
     @Transactional
     @Secured(['ROLE_ADMIN', 'ROLE_USER'] )
     def vote() {
-        println(params)
         VoteCommand cmd = new VoteCommand()
         bindData(cmd, params)
         if(!cmd.hasErrors()) {

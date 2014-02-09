@@ -762,5 +762,19 @@ a:hover {
 .message_vote_comment .vote-DOWN .arrow-down {
     background-image: url('/images/arrows/arrow_down_vote_s.png');
 }
+.best_answer {
+    float: left;
+}
+.best_answer, .best_answer div, .best_answer a {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+.best_answer .best-true {
+    background-image: url('/images/ok.png');
+}
+.best_answer .best-false {
+    background-image: url('/images/ko.png');
+}
 
 /*-----------------------------------*/
